@@ -5,3 +5,5 @@ export interface CartItem {
 	price: number;
 	image: string;
 }
+
+const onDeleteAll = () => {}

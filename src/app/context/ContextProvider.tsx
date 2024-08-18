@@ -1,5 +1,5 @@
 import { FC, ReactNode, useState } from "react";
-import { User } from "@/lib/types/user";
+import { User } from "lib/types/user";
 import { GlobalContext } from "../hooks/useGlobal";
 import Cookies from "universal-cookie";
 

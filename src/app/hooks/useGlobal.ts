@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { User } from "@/lib/types/user";
+import { User } from "lib/types/user";
 
 interface GBInterface {
 	authUser: User | null;

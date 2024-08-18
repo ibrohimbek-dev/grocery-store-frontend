@@ -9,9 +9,11 @@ import Footer from "./components/footer/Footer";
 import "../css/main.css";
 import Home from "./screens/home";
 import Events from "./components/events/Events";
+import useBasket from "./hooks/useBasket";
 
 const App = () => {
 	const theme = useThemeMode();
+	const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = useBasket();
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -21,10 +23,16 @@ const App = () => {
 					<div className="">
 						<Events />
 					</div>
-					<Navbar />
+					<Navbar
+						cartItems={cartItems}
+						onAdd={onAdd}
+						onRemove={onRemove}
+						onDelete={onDelete}
+						onDeleteAll={onDeleteAll}
+					/>
 				</>
 
-				<div className="border-4 border-green-500">
+				<div className="border-4 border-green-500 main-container">
 					<>
 						<Home />
 					</>
