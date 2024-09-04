@@ -10,7 +10,8 @@ export interface Product {
 	productSize: string;
 	productDesc?: string;
 	productImages: string[];
-	productViews: number;
+  productViews: number;
+  productLikes?: number;
 }
 
 export interface ProductInquiry {
@@ -18,6 +19,7 @@ export interface ProductInquiry {
 	page: number;
 	limit: number;
 	productCollection?: ProductCollection;
+	productStatus?: ProductStatus;
 	search?: string;
 }
 
@@ -32,6 +34,7 @@ export interface ProductInput {
 	productDesc?: string;
 	productImages?: string[];
 	productViews?: number;
+	productLikes?: number;
 }
 
 export interface ProductUpdateInput {

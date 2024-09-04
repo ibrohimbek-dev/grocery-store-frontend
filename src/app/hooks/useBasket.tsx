@@ -1,5 +1,6 @@
-import { CartItem } from "lib/types/search";
+
 import { useState } from "react";
+import { CartItem } from "../../lib/types/search";
 
 const useBasket = () => {
 	const cartJson: string | null = localStorage.getItem("cartData");
@@ -7,7 +8,9 @@ const useBasket = () => {
 
 	const [cartItems, setCartItems] = useState<CartItem[]>(currentCart);
 
-	const onAdd = (input: CartItem) => {
+  const onAdd = (input: CartItem) => {
+    
+    console.log("input =>", input)
 		const exist: any = cartItems.find((item: CartItem) => {
 			return item._id === input._id;
 		});
@@ -76,3 +79,7 @@ const useBasket = () => {
 };
 
 export default useBasket;
+
+
+
+// DONE!

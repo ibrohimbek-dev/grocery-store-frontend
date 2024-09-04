@@ -1,7 +1,7 @@
 import { FC, ReactNode, useState } from "react";
-import { User } from "lib/types/user";
 import { GlobalContext } from "../hooks/useGlobal";
 import Cookies from "universal-cookie";
+import { User } from "../../lib/types/user";
 
 const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
 	const cookies = new Cookies();
@@ -16,10 +16,18 @@ const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
 	const [authUser, setAuthUser] = useState<User | null>(userData);
 	const [darkMode, setDarkMode] = useState<boolean>(false);
+	const [orderBuilder, setOrderBuilder] = useState<Date>(new Date());
 
 	return (
 		<GlobalContext.Provider
-			value={{ authUser, setAuthUser, darkMode, setDarkMode }}
+			value={{
+				authUser,
+				setAuthUser,
+				darkMode,
+				setDarkMode,
+				orderBuilder,
+				setOrderBuilder,
+			}}
 		>
 			{children}
 		</GlobalContext.Provider>
@@ -27,3 +35,5 @@ const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
 };
 
 export default ContextProvider;
+
+// DONE!

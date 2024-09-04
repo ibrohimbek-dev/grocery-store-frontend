@@ -25,6 +25,24 @@ export const sweetTopSuccessAlert = async (
 	});
 };
 
+export const sweetTopSmallErrorAlert = async (
+	msg: string,
+	duration: number = 2000
+) => {
+	const Toast = Swal.mixin({
+		toast: true,
+		position: "top-end",
+		showConfirmButton: false,
+		timer: duration,
+		timerProgressBar: true,
+	});
+
+	Toast.fire({
+		icon: "error",
+		title: msg,
+	}).then();
+};
+
 export const sweetTopSmallSuccessAlert = async (
 	msg: string,
 	duration: number = 2000

@@ -7,13 +7,26 @@ export interface AppRootState {
 	homePage: HomePageState;
 	productPage: ProductsPageState;
 	orderPage: OrderPageState;
+	modalPage: ModalProductState;
 }
 
-// HOME PAGE TYPE INTERFACES:
+export interface ModalProductState {
+	modalProduct: Product | null;
+}
+
+// HomePage PAGE TYPE INTERFACES:
 export interface HomePageState {
-	popularProducts: Product[];
-	newProducts: Product[];
-	topUsers: User[];
+	electronicsSection: [];
+	textTilesSection: [];
+	homeLivingSection: [];
+	beautyCareSection: [];
+	sportsOutdoorsSection: [];
+	toysGamesSection: [];
+	booksMediaSection: [];
+	grocerySection: [];
+	automotiveSection: [];
+	healthWellness: [];
+	topUsers: [];
 }
 
 // PRODUCTS PAGE TYPE INTERFACES:

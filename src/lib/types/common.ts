@@ -11,3 +11,15 @@ export interface BasketProps {
 	onDelete: (item: CartItem) => void;
 	onDeleteAll: () => void;
 }
+
+
+export interface CardActionsProps {
+	onAdd: (item: CartItem) => void;
+}
+
+export interface AuthModalProps {
+	signUpOpen: boolean;
+	loginOpen: boolean;
+	handleSignupClose: () => void;
+	handleLoginClose: () => void;
+}
