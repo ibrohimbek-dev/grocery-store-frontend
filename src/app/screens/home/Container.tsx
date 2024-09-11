@@ -7,12 +7,15 @@ import ModalProduct from "../../components/modal/ModalProduct";
 import { CartItem } from "../../../lib/types/search";
 import { NavLink } from "react-router-dom";
 import { GoArrowUpRight } from "react-icons/go";
+import { useGlobals } from "../../hooks/useGlobal";
 
 interface ContainerProps {
 	productData: Product[];
 	sectionName: string;
 	moreLink: string;
 	onAdd: (item: CartItem) => void;
+	onDeleteAll: () => void;
+	cartItems: CartItem[];
 }
 
 const Container = ({
@@ -20,21 +23,24 @@ const Container = ({
 	sectionName,
 	moreLink,
 	onAdd,
+	onDeleteAll,
+	cartItems,
 }: ContainerProps) => {
 	const [modalOpen, setModalOpen] = useState<boolean>(false);
 	const [isProductId, setProductId] = useState<string>("");
+	const { setUpdateNum } = useGlobals();
 
 	const handleClose = () => {
 		setModalOpen(false);
-		setProductId("");
+    setProductId("");
+    setUpdateNum(0)
 	};
 
 	const setModalOpenData = (productId: string) => {
 		setProductId(productId);
 		setModalOpen(true);
+		setUpdateNum(1);
 	};
-
-	// TODO: Shu yerda view increase qilishim kerak
 
 	return (
 		<>
@@ -83,7 +89,12 @@ const Container = ({
 									</div>
 
 									<>
-										<CardActions onAdd={onAdd} productData={product} />
+										<CardActions
+											cartItems={cartItems}
+											onAdd={onAdd}
+											onDeleteAll={onDeleteAll}
+											productData={product}
+										/>
 									</>
 								</div>
 							);
@@ -115,10 +126,14 @@ const Container = ({
 					open={modalOpen}
 					handleClose={handleClose}
 					onAdd={onAdd}
+					onDeleteAll={onDeleteAll}
+					cartItems={cartItems}
 				/>
 			</>
 		</>
 	);
 };
+
+// FIXME:
 
 export default Container;

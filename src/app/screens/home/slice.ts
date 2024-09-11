@@ -19,22 +19,22 @@ const homePageSlice = createSlice({
 	name: "homePage",
 	initialState,
 	reducers: {
-		setElectronics: (state, action) => {
+		setFreshProduce: (state, action) => {
 			state.electronicsSection = action.payload;
 		},
-		setTextTiles: (state, action) => {
+		setDairyProducts: (state, action) => {
 			state.textTilesSection = action.payload;
 		},
-		setHomeLiving: (state, action) => {
+		setMeatPoultry: (state, action) => {
 			state.homeLivingSection = action.payload;
 		},
-		setBeautyCare: (state, action) => {
+		setBakeryItems: (state, action) => {
 			state.beautyCareSection = action.payload;
 		},
-		setSportsOutdoors: (state, action) => {
+		setCannedFoods: (state, action) => {
 			state.sportsOutdoorsSection = action.payload;
 		},
-		setToysGames: (state, action) => {
+		setBeverages: (state, action) => {
 			state.toysGamesSection = action.payload;
 		},
 		setBooksMedia: (state, action) => {
@@ -56,12 +56,12 @@ const homePageSlice = createSlice({
 });
 
 export const {
-	setElectronics,
-	setTextTiles,
-	setHomeLiving,
-	setBeautyCare,
-	setSportsOutdoors,
-	setToysGames,
+	setFreshProduce,
+	setDairyProducts,
+	setMeatPoultry,
+	setBakeryItems,
+	setCannedFoods,
+	setBeverages,
 	setBooksMedia,
 	setGrocery,
 	setAutomotive,

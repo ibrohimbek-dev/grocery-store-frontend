@@ -7,19 +7,33 @@ import { Snackbar, Alert } from "@mui/material";
 import { Product } from "../../../lib/types/product";
 import { CartItem } from "../../../lib/types/search";
 import { T } from "../../../lib/types/common";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useGlobals } from "../../hooks/useGlobal";
+import { Messages } from "../../../lib/config";
+import { sweetTopSmallErrorAlert } from "../../../lib/sweetAlert";
+import OrderService from "../../services/OrderService";
 
 interface CardActionsProps {
 	productData?: Product | null;
 	onAdd: (item: CartItem) => void;
+	onDeleteAll: () => void;
+	cartItems: CartItem[];
 }
 
-const CardActions = ({ productData, onAdd }: CardActionsProps) => {
+const CardActions = ({
+	productData,
+	onAdd,
+	onDeleteAll,
+	cartItems,
+}: CardActionsProps) => {
 	const [badgeLength, setBadgeLength] = useState<number>(0);
 	const [cartUpdated, setCartUpdated] = useState<boolean>(false);
 	const [openAlert, setOpenAlert] = useState<boolean>(false);
+	const { authUser, setOrderBuilder } = useGlobals();
 
-	const cartData: string | null = localStorage.getItem("cartData");
+	const navigate = useNavigate();
+
+	const cartData: string | CartItem[] | null = localStorage.getItem("cartData");
 	useEffect(() => {
 		if (cartData) {
 			const parsedCartData: CartItem[] = JSON.parse(cartData);
@@ -44,6 +58,7 @@ const CardActions = ({ productData, onAdd }: CardActionsProps) => {
 	}, [productData, cartUpdated, cartData]); // Depend on cartUpdated
 
 	const handleAddToCart = (e: T) => {
+		e.stopPropagation();
 		if (productData?._id) {
 			onAdd({
 				_id: productData._id,
@@ -58,12 +73,30 @@ const CardActions = ({ productData, onAdd }: CardActionsProps) => {
 				setOpenAlert(false);
 			}, 3000);
 		}
-		e.stopPropagation();
+
 		setCartUpdated((prev) => !prev);
 	};
 
-	const proceedOrderHandler = (productId: string) => {
-		console.log("Order productData =>", productId);
+	const proceedOrderHandler = async (e: T) => {
+		try {
+			e.stopPropagation();
+			if (!authUser) {
+				throw new Error(Messages.LOGIN_REQUIRED);
+			}
+
+			if (cartItems.length) {
+				const orderService = new OrderService();
+				await orderService.createOrder(cartItems);
+
+				onDeleteAll();
+				setOrderBuilder(new Date());
+				navigate("/store/orders");
+			} else {
+				throw new Error(Messages.CART_EMPTY);
+			}
+		} catch (err: any) {
+			sweetTopSmallErrorAlert(err.message);
+		}
 	};
 
 	const handleLikeBtn = (productId: string) => {
@@ -73,18 +106,15 @@ const CardActions = ({ productData, onAdd }: CardActionsProps) => {
 	return (
 		<>
 			<div className="flex space-x-4 justify-between items-center py-2 px-1">
-				<Tooltip title="Order this item">
+				<Tooltip title={authUser ? "Order this item" : "Please login first!"}>
 					<Button
 						variant="contained"
 						color="success"
-						onClick={(e) => {
-							proceedOrderHandler(productData?._id!);
-							e.stopPropagation();
-						}}
+						onClick={proceedOrderHandler}
 						aria-label="buy"
 						sx={{ width: "59%" }} // Set width to 60%
 					>
-						<NavLink to={"/shop/orders"}>Order</NavLink>
+						Order
 					</Button>
 				</Tooltip>
 
@@ -139,3 +169,6 @@ const CardActions = ({ productData, onAdd }: CardActionsProps) => {
 };
 
 export default CardActions;
+
+// DONE!
+// TODO: Bu qisimda "Order" bosilganda, bosilan order'ni pausedOrders'ga olib o'tishim kerak

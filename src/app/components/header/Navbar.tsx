@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import ListRoundedIcon from "@mui/icons-material/ListRounded";
 
@@ -10,21 +10,24 @@ import {
 	sweetErrorHandling,
 	sweetTopSmallErrorAlert,
 	sweetTopSmallSuccessAlert,
-	sweetTopSuccessAlert,
 } from "../../../lib/sweetAlert";
 import { useGlobals } from "../../hooks/useGlobal";
 import { BasketProps, T } from "../../../lib/types/common";
 import { Messages } from "../../../lib/config";
 import UserService from "../../services/UserService";
+import OrderService from "../../services/OrderService";
 
 const Navbar = (props: BasketProps) => {
 	const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
-	const { authUser, darkMode, setDarkMode, setAuthUser } = useGlobals();
+	const { authUser, darkMode, setDarkMode, setAuthUser, setOrderBuilder } =
+		useGlobals();
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const [open, setOpen] = useState<boolean>(false);
+	const navigate = useNavigate();
 
 	const location = useLocation();
-	const isOrdersPage = location.pathname === "/shop/orders";
+	const isOrdersPage = location.pathname === "/store/orders";
+	const isUserPage = location.pathname === "/store/user-settings";
 
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -43,7 +46,9 @@ const Navbar = (props: BasketProps) => {
 			setOpen(false);
 
 			await userService.userLogout();
-			await sweetTopSuccessAlert("success", 700);
+			await sweetTopSmallSuccessAlert("success", 700);
+			onDeleteAll();
+			setOrderBuilder(new Date());
 			setAuthUser(null);
 		} catch (error) {
 			sweetErrorHandling(Messages.SOMETHING_WENT_WRONG);
@@ -52,23 +57,6 @@ const Navbar = (props: BasketProps) => {
 
 	const handleClickSideBar = () => {
 		alert("Side bar coming soon!");
-	};
-
-	const copyTextOnClick = (textToCopy: string) => {
-		navigator.clipboard
-			.writeText(textToCopy)
-			.then(() => {
-				sweetTopSmallSuccessAlert("Url is copied successfully", 1000).then();
-			})
-			.catch((error) => {
-				console.log("Error on copying url! =>", error);
-				sweetTopSmallErrorAlert("Error on copying url!").then();
-			});
-	};
-
-	const handleCopyurl = () => {
-		const currentUrl = window.location.href;
-		copyTextOnClick(currentUrl);
 	};
 
 	const handleClickSearch = () => {
@@ -91,6 +79,29 @@ const Navbar = (props: BasketProps) => {
 		setOpen(false);
 	};
 
+	const proceedOrderHandler = async () => {
+		try {
+			handleClose();
+
+			if (!authUser) {
+				throw new Error(Messages.LOGIN_REQUIRED);
+			}
+
+			if (cartItems.length) {
+				const orderService = new OrderService();
+				await orderService.createOrder(cartItems);
+
+				onDeleteAll();
+				setOrderBuilder(new Date());
+				navigate("/store/orders");
+			} else {
+				throw new Error(Messages.CART_EMPTY);
+			}
+		} catch (err: any) {
+			sweetTopSmallErrorAlert(err.message).then();
+		}
+	};
+
 	return (
 		<div className="main-container flex flex-col">
 			<div className="flex justify-between">
@@ -107,14 +118,14 @@ const Navbar = (props: BasketProps) => {
 					<div className={authUser ? "hidden" : "flex space-x-1"}>
 						<NavLink
 							className="border rounded-md bg-[#8d99ae] p-1 text-sm"
-							to={"/shop/process/login"}
+							to={"/store/process/login"}
 							title="login"
 						>
 							login
 						</NavLink>
 						<NavLink
 							className="border rounded-md bg-[#8d99ae] p-1 text-sm"
-							to={"/shop/process/signup"}
+							to={"/store/process/signup"}
 							title="signup"
 						>
 							signup
@@ -143,22 +154,21 @@ const Navbar = (props: BasketProps) => {
 						<ListRoundedIcon sx={{ fontSize: 60 }} />
 					</div>
 					<NavLink
-						to={"/shop/"}
-						onClick={handleCopyurl}
+						to={"/store/"}
 						className="text-[#bc6c25] cursor-pointer text-3xl font-bold"
 					>
 						My Shop
 					</NavLink>
 				</div>
 
-				<div className="flex w-1/2 items-center justify-between p-4 bg-white">
-					{isOrdersPage ? (
-						<div className="flex items-center justify-center p-4 bg-yellow-100 border border-yellow-300 rounded-lg">
-							<span className="font-semibold text-yellow-800">
-								Select any shortcut links or continue your progress!
-							</span>
-						</div>
-					) : (
+				{isOrdersPage || isUserPage ? (
+					<div className="flex items-center shadow-2xl justify-center p-4 border rounded-lg">
+						<span className="font-semibold text-yellow-800">
+							Choose a shortcut or advance your journey!
+						</span>
+					</div>
+				) : (
+					<div className="flex w-1/2 items-center justify-between p-4 bg-transform">
 						<div className="rounded-lg space-x-1 w-full flex items-center">
 							<input
 								className="w-full text-base shadow-md px-3 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent text-gray-700 placeholder-gray-400"
@@ -173,8 +183,8 @@ const Navbar = (props: BasketProps) => {
 								<SearchIcon sx={{ fontSize: 34 }} />
 							</div>
 						</div>
-					)}
-				</div>
+					</div>
+				)}
 
 				<div className=" w-3/10 flex justify-end items-center">
 					<div className="flex space-x-3 justify-center items-center">
@@ -213,8 +223,9 @@ const Navbar = (props: BasketProps) => {
 								</MenuItem>
 								<MenuItem onClick={handleClose}>
 									<NavLink
+										onClick={proceedOrderHandler}
 										className={"hover:text-black hover:font-semibold w-full"}
-										to={"/shop/orders"}
+										to={"/store/orders"}
 									>
 										Order Page
 									</NavLink>
@@ -232,7 +243,7 @@ const Navbar = (props: BasketProps) => {
 										</MenuItem>
 									) : (
 										<MenuItem onClick={handleClose}>
-											<NavLink to={"/shop/process/login"}>
+											<NavLink to={"/store/process/login"}>
 												Login | Signup
 											</NavLink>
 										</MenuItem>
@@ -265,67 +276,67 @@ const Navbar = (props: BasketProps) => {
 				<div className="space-x-4">
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/shop/electronics"}
+						to={"/store/example"}
 					>
-						#electronics
+						#example
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/shop/text_tiles"}
+						to={"/store/text_tiles"}
 					>
 						#text-tiles
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/shop/home_living"}
+						to={"/store/home_living"}
 					>
 						#home_living
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/shop/beauty_skin"}
+						to={"/store/beauty_skin"}
 					>
 						#beauty_skin
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/shop/sports"}
+						to={"/store/sports"}
 					>
 						#sports
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/shop/toys"}
+						to={"/store/toys"}
 					>
 						#toys
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/shop/books"}
+						to={"/store/books"}
 					>
 						#books
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/shop/grocery"}
+						to={"/store/grocery"}
 					>
 						#grocery
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/shop/automotive"}
+						to={"/store/automotive"}
 					>
 						#automotive
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/shop/health"}
+						to={"/store/health"}
 					>
 						#health
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/shop/others"}
+						to={"/store/others"}
 					>
 						#others
 					</NavLink>

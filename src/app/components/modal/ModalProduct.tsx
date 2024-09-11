@@ -34,6 +34,8 @@ interface ModalProps {
 	open: boolean;
 	handleClose: () => void;
 	onAdd: (item: CartItem) => void;
+	onDeleteAll: () => void;
+	cartItems: CartItem[];
 }
 
 // REDUX SELECTOR:
@@ -52,13 +54,15 @@ const ModalProduct = ({
 	open,
 	onAdd,
 	handleClose,
+	onDeleteAll,
+	cartItems,
 }: ModalProps) => {
 	const { setModalProduct } = actionDispatch(useDispatch());
 	const { modalProduct } = useSelector(modalProductRetriever);
-	const [images, setImages] = useState<string[] | null>(null);
+	const [images, setImages] = useState<string[] | null>(null);	
 
 	useEffect(() => {
-		const productService = new ProductService();
+		const productService = new ProductService();		
 
 		if (productId?.length > 0) {
 			productService
@@ -76,8 +80,6 @@ const ModalProduct = ({
 	}, [modalProduct]);
 
 	SwiperCore.use([FreeMode, Navigation, Thumbs, Pagination]);
-
-	console.log("modalProduct?.productDesc =>", modalProduct?.productDesc);
 
 	return (
 		<Modal
@@ -179,7 +181,12 @@ const ModalProduct = ({
 					Close
 				</Button>
 
-				<CardActions onAdd={onAdd} productData={modalProduct} />
+				<CardActions
+					onDeleteAll={onDeleteAll}
+					cartItems={cartItems}
+					onAdd={onAdd}
+					productData={modalProduct}
+				/>
 			</div>
 		</Modal>
 	);

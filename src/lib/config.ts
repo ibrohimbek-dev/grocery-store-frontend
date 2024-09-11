@@ -7,4 +7,19 @@ export const Messages = {
 	EMPTY_MESSAGE: "Message is empty!",
 	INVALID_IMAGE_FORMAT: "Only images with jpeg, jpg, png format allowed!",
 	MODIFIED_SUCCESSFULLY: "Modified successfully!",
+	FILE_UPLOAD_ERROR: "Error while uploading the file!",
+	IMAGE_TYPE_FAILED: "Please insert only jpeg, jpg and png!",
+	UPLOAD_IMAGE: "Please, upload an image!",
+	PASSWORD_NOT_MATCH: "Passwords does not match!",
+	CART_EMPTY: "Your cart is empty!",
+	MAX_PRODUCT_COUNT: "You reached the maximum amount of product!",
+	COMING_SOON: "Coming soon!",
+	INVALID_CARD_NUMBER:
+		"Invalid card number. Please use the format: 1234 5678  90123 4567",
+	INVALID_EXP_DATE: "Invalid expiration date. Please use the format: MM/YY",
+	INVALID_CVV: "Invalid CVV. Please enter a 3-digit number.",
+	CARD_HOLDER_EMPTY: "Cardholder name cannot be empty.",
+	CARD_VALIDATED: "Your card validated successfully!",
+  CARD_TYPE_REQUIRED: "Select your card type!",
+  ADD_YOUR_CARD: "To continue, add your credit card first!"
 };

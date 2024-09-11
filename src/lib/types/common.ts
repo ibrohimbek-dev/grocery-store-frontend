@@ -14,7 +14,9 @@ export interface BasketProps {
 
 
 export interface CardActionsProps {
-	onAdd: (item: CartItem) => void;
+	cartItems: CartItem[];
+	onAdd: (item: CartItem) => void;	
+	onDeleteAll: () => void;
 }
 
 export interface AuthModalProps {

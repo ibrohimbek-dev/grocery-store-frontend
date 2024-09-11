@@ -16,7 +16,9 @@ const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
 	const [authUser, setAuthUser] = useState<User | null>(userData);
 	const [darkMode, setDarkMode] = useState<boolean>(false);
-	const [orderBuilder, setOrderBuilder] = useState<Date>(new Date());
+  const [orderBuilder, setOrderBuilder] = useState<Date>(new Date());
+  const [updateNum, setUpdateNum] = useState<number>(0)
+  
 
 	return (
 		<GlobalContext.Provider
@@ -27,6 +29,8 @@ const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
 				setDarkMode,
 				orderBuilder,
 				setOrderBuilder,
+				setUpdateNum,
+				updateNum,
 			}}
 		>
 			{children}

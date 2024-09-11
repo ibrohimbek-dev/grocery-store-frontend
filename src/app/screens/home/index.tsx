@@ -19,30 +19,31 @@ import HealthWellness from "./HealthWellness";
 import HomeLiving from "./HomeLiving";
 import {
 	setAutomotive,
-	setBeautyCare,
+	setBakeryItems,
 	setBooksMedia,
-	setElectronics,
+	setFreshProduce,
 	setGrocery,
 	setHealthWellness,
-	setHomeLiving,
-	setSportsOutdoors,
-	setTextTiles,
+	setMeatPoultry,
+	setCannedFoods,
+	setDairyProducts,
 	setTopUsers,
-	setToysGames,
+	setBeverages,
 } from "./slice";
 import Electronics from "./Electronics";
 import AdsMediaSection from "./AdsMediaSection";
 import TopUsers from "./TopUsers";
 import { CardActionsProps } from "../../../lib/types/common";
+import { useGlobals } from "../../hooks/useGlobal";
 
 // REDUX SLICE:
 const actionDispatch = (dispatch: Dispatch) => ({
-	setElectronics: (data: Product[]) => dispatch(setElectronics(data)),
-	setTextTiles: (data: Product[]) => dispatch(setTextTiles(data)),
-	setHomeLiving: (data: Product[]) => dispatch(setHomeLiving(data)),
-	setBeautyCare: (data: Product[]) => dispatch(setBeautyCare(data)),
-	setSportsOutdoors: (data: Product[]) => dispatch(setSportsOutdoors(data)),
-	setToysGames: (data: Product[]) => dispatch(setToysGames(data)),
+	setFreshProduce: (data: Product[]) => dispatch(setFreshProduce(data)),
+	setDairyProducts: (data: Product[]) => dispatch(setDairyProducts(data)),
+	setMeatPoultry: (data: Product[]) => dispatch(setMeatPoultry(data)),
+	setBakeryItems: (data: Product[]) => dispatch(setBakeryItems(data)),
+	setCannedFoods: (data: Product[]) => dispatch(setCannedFoods(data)),
+	setBeverages: (data: Product[]) => dispatch(setBeverages(data)),
 	setBooksMedia: (data: Product[]) => dispatch(setBooksMedia(data)),
 	setGrocery: (data: Product[]) => dispatch(setGrocery(data)),
 	setAutomotive: (data: Product[]) => dispatch(setAutomotive(data)),
@@ -50,27 +51,23 @@ const actionDispatch = (dispatch: Dispatch) => ({
 	setTopUsers: (data: User[]) => dispatch(setTopUsers(data)),
 });
 
-const HomePage = ({ onAdd }: CardActionsProps) => {
-  
+const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 	const {
-		setElectronics,
-		setTextTiles,
-		setHomeLiving,
-		setBeautyCare,
-		setSportsOutdoors,
-		setToysGames,
-		setBooksMedia,
-		setGrocery,
-		setAutomotive,
-		setHealthWellness,
+		setFreshProduce,
+		setDairyProducts,
+		setMeatPoultry,
+		setBakeryItems,
+		setCannedFoods,
+		setBeverages,
 		setTopUsers,
-  } = actionDispatch(useDispatch());
-  
+	} = actionDispatch(useDispatch());
 
+	const { setOrderBuilder, updateNum } = useGlobals();
 
 	useEffect(() => {
 		const productService = new ProductService();
 		const userService = new UserService();
+		setOrderBuilder(new Date());
 
 		// TODO: page & limit ustida ishlashim kerak
 
@@ -79,100 +76,60 @@ const HomePage = ({ onAdd }: CardActionsProps) => {
 				page: 1,
 				limit: 7,
 				order: "productViews",
-				productCollection: ProductCollection.ELECTRONICS,
+				productCollection: ProductCollection.FRESH_PRODUCE,
 			})
-			.then((data) => setElectronics(data))
-			.catch((err) => console.log("Error on data setElectronics =>", err));
+			.then((data) => setFreshProduce(data))
+			.catch((err) => console.log("Error on data setFreshProduce =>", err));
 
 		productService
 			.getProductsBySort({
 				page: 1,
 				limit: 7,
 				order: "productViews",
-				productCollection: ProductCollection.TEXT_TILES,
+				productCollection: ProductCollection.DAIRY_PRODUCTS,
 			})
-			.then((data) => setTextTiles(data))
-			.catch((err) => console.log("Error on data setTextTiles =>", err));
+			.then((data) => setDairyProducts(data))
+			.catch((err) => console.log("Error on data setDairyProducts =>", err));
 
 		productService
 			.getProductsBySort({
 				page: 1,
 				limit: 7,
 				order: "productViews",
-				productCollection: ProductCollection.HOME_AND_LIVING,
+				productCollection: ProductCollection.MEAT_AND_POULTRY,
 			})
-			.then((data) => setHomeLiving(data))
-			.catch((err) => console.log("Error on data setHomeLiving =>", err));
+			.then((data) => setMeatPoultry(data))
+			.catch((err) => console.log("Error on data setMeatPoultry =>", err));
 
 		productService
 			.getProductsBySort({
 				page: 1,
 				limit: 7,
 				order: "productViews",
-				productCollection: ProductCollection.BEAUTY_AND_PERSONAL_CARE,
+				productCollection: ProductCollection.BAKERY_ITEMS,
 			})
-			.then((data) => setBeautyCare(data))
-			.catch((err) => console.log("Error on data setBeautyCare =>", err));
+			.then((data) => setBakeryItems(data))
+			.catch((err) => console.log("Error on data setBakeryItems =>", err));
 
 		productService
 			.getProductsBySort({
 				page: 1,
 				limit: 7,
 				order: "productViews",
-				productCollection: ProductCollection.SPORTS_AND_OUTDOORS,
+				productCollection: ProductCollection.CANNED_GOODS,
 			})
-			.then((data) => setSportsOutdoors(data))
-			.catch((err) => console.log("Error on data setSportsOutdoors =>", err));
+			.then((data) => setCannedFoods(data))
+			.catch((err) => console.log("Error on data setCannedFoods =>", err));
 
 		productService
 			.getProductsBySort({
 				page: 1,
 				limit: 7,
 				order: "productViews",
-				productCollection: ProductCollection.TOYS_AND_GAMES,
+				productCollection: ProductCollection.BEVERAGES,
 			})
-			.then((data) => setToysGames(data))
-			.catch((err) => console.log("Error on data setToysGames =>", err));
-
-		productService
-			.getProductsBySort({
-				page: 1,
-				limit: 7,
-				order: "productViews",
-				productCollection: ProductCollection.BOOKS_AND_MEDIA,
-			})
-			.then((data) => setBooksMedia(data))
-			.catch((err) => console.log("Error on data setBooksMedia =>", err));
-
-		productService
-			.getProductsBySort({
-				page: 1,
-				limit: 7,
-				order: "productViews",
-				productCollection: ProductCollection.GROCERY,
-			})
-			.then((data) => setGrocery(data))
-			.catch((err) => console.log("Error on data setGrocery =>", err));
-
-		productService
-			.getProductsBySort({
-				page: 1,
-				limit: 20,
-				order: "productViews",
-				productCollection: ProductCollection.AUTOMOTIVE,
-			})
-			.then((data) => setAutomotive(data))
-			.catch((err) => console.log("Error on data setAutomotive =>", err));
-
-		productService
-			.getProductsBySort({
-				page: 1,
-				limit: 7,
-				order: "productViews",
-				productCollection: ProductCollection.HEALTH_AND_WELLNESS,
-			})
-			.then((data) => setHealthWellness(data))
-			.catch((err) => console.log("Error on data setHealthWellness =>", err));
+			.then((data) => setBeverages(data))
+			.catch((err) => console.log("Error on data setBeverages =>", err));
 
 		// Get top users:
 		userService
@@ -181,13 +138,17 @@ const HomePage = ({ onAdd }: CardActionsProps) => {
 			.catch((err) => console.log("Error on setTopUsers =>", err));
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [updateNum]);
 
 	return (
 		<div className="border-4 border-yellow-400 overflow-hidden w-full flex flex-row justify-center items-center">
 			<div className="flex flex-col w-full items-center space-y-10 mt-4">
 				<HeroSlider />
-				<Electronics onAdd={onAdd} />
+				<Electronics
+					cartItems={cartItems}
+					onAdd={onAdd}
+					onDeleteAll={onDeleteAll}
+				/>
 				<TextTiles />
 				<HomeLiving />
 				<BeautyCare />

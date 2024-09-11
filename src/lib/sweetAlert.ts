@@ -12,16 +12,32 @@ export const sweetErrorHandling = async (err: any) => {
 	});
 };
 
+export const sweetPopupErrorHandling = async (
+	msg: string,
+	duration: number = 2000
+) => {
+	await Swal.fire({
+		icon: "error",
+		text: msg,
+		showConfirmButton: false,
+		timer: duration,
+	});
+};
+
 export const sweetTopSuccessAlert = async (
 	msg: string,
 	duration: number = 2000
 ) => {
 	await Swal.fire({
-		position: "top-end",
 		icon: "success",
 		title: msg,
-		showConfirmButton: false,
-		timer: duration,
+		showConfirmButton: true,
+		confirmButtonText: "OK",
+		timer: duration, // Optional: This will still allow the alert to auto-close after the duration
+		timerProgressBar: true,
+		position: "center", // Center the alert
+		backdrop: true, // Optional: Adds a backdrop
+		allowOutsideClick: false, // Prevents closing by clicking outside
 	});
 };
 
@@ -57,6 +73,24 @@ export const sweetTopSmallSuccessAlert = async (
 
 	Toast.fire({
 		icon: "success",
+		title: msg,
+	}).then();
+};
+
+export const sweetTopSmallInfoAlert = async (
+	msg: string,
+	duration: number = 2000
+) => {
+	const Toast = Swal.mixin({
+		toast: true,
+		position: "top-end",
+		showConfirmButton: false,
+		timer: duration,
+		timerProgressBar: true,
+	});
+
+	Toast.fire({
+		icon: "info",
 		title: msg,
 	}).then();
 };

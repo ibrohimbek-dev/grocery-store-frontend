@@ -20,7 +20,7 @@ class OrderService {
 			const orderItems: OrderItemInput[] = input.map((cartItem: CartItem) => {
 				return {
 					productId: cartItem._id,
-					itemQuantitiy: cartItem.quantity,
+					itemQuantity: cartItem.quantity,
 					itemPrice: cartItem.price,
 				};
 			});
@@ -40,7 +40,7 @@ class OrderService {
 
 	public async getMyOrders(input: OrderInquiry): Promise<Order[]> {
 		try {
-			const url = `${this.path}/user/order/update`;
+			const url = `${this.path}/user/order/all`;
 			const query = `?page=${input.page}&limit=${input.limit}&orderStatus=${input.orderStatus}`;
 
 			const result = await axios.get(url + query, { withCredentials: true });
@@ -53,19 +53,20 @@ class OrderService {
 		}
 	}
 
-	public async updateOrder(input: OrderUpdateInput): Promise<Order> {
+	public async updateOrderStatus(input: OrderUpdateInput): Promise<Order> {
 		try {
-      const url = `${this.path}/user/order/update`;
-      console.log("updateOrder input =>", input);
+			const url = `${this.path}/user/order/update/status`;
+			console.log("updateOrderStatus input =>", input);
 			const result = await axios.post(url, input, { withCredentials: true });
-			console.log("result on updateOrder =>", result);
+			console.log("result on updateOrderStatus =>", result);
 
 			return result.data;
 		} catch (error) {
-			console.log("Error on updateOrder =>", error);
+			console.log("Error on updateOrderStatus =>", error);
 			throw error;
 		}
 	}
+
 }
 
 export default OrderService;

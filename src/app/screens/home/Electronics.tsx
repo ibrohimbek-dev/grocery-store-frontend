@@ -11,18 +11,19 @@ const electronicsRetriever = createSelector(
 	(electronicsSection) => ({ electronicsSection })
 );
 
-
-
-const Electronics = ({ onAdd }: CardActionsProps) => {
+const Electronics = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 	const { electronicsSection } = useSelector(electronicsRetriever);
 
 	console.log("electronicsSection =>", electronicsSection);
+
 	return (
 		<Container
-			moreLink="/shop/electronics"
+			moreLink="/store/electronics"
 			sectionName={"Electronics section"}
 			productData={electronicsSection}
+			cartItems={cartItems}
 			onAdd={onAdd}
+			onDeleteAll={onDeleteAll}
 		/>
 	);
 };

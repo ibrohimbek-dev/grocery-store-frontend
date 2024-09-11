@@ -1,11 +1,20 @@
-import React from 'react'
+import { TabPanel } from "@mui/lab";
+import React from "react";
 
-const ProcessOrders = () => {
-  return (
-    <div>ProcessOrders</div>
-  )
+interface ProcessOrderProps {
+	setValue: (input: string) => void;
 }
 
-export default ProcessOrders
+const ProcessOrders = ({ setValue }: ProcessOrderProps) => {
+	return (
+		<TabPanel value="2">
+			<div className="flex justify-between">
+				<div className="text-2xl border-2 p-2 shadow-xl">ProcessOrders</div>				
+			</div>
+		</TabPanel>
+	);
+};
 
-// Shu qismidaman
+export default ProcessOrders;
+
+// TODO: Shu qismidaman

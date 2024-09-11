@@ -9,17 +9,17 @@ import { BasketProps } from "../../../lib/types/common";
 import { CartItem } from "../../../lib/types/search";
 import { Messages, serverApi } from "../../../lib/config";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import OrderService from "../../services/OrderService";
 import { useGlobals } from "../../hooks/useGlobal";
-import { sweetErrorHandling } from "../../../lib/sweetAlert";
+import { sweetPopupErrorHandling } from "../../../lib/sweetAlert";
 
 const Basket = (props: BasketProps) => {
 	const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
+	const { authUser, setOrderBuilder } = useGlobals();
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
 	const navigate = useNavigate();
-	const { authUser, setOrderBuilder } = useGlobals();
 
 	const itemPrice: number = cartItems.reduce(
 		(a: number, c: CartItem): number => {
@@ -45,18 +45,19 @@ const Basket = (props: BasketProps) => {
 		try {
 			handleClose();
 
-			// if (!authUser) {
-			// 	// throw new Error(Messages.LOGIN_REQUIRED)
-			// }
+			if (!authUser) {
+				throw new Error(Messages.LOGIN_REQUIRED);
+			}
 			const orderService = new OrderService();
 			await orderService.createOrder(cartItems);
 
 			onDeleteAll();
 			setOrderBuilder(new Date());
-			navigate("/shop/orders");
+			navigate("/store/orders");
 		} catch (err) {
 			console.log("Error on processOrderHandler =>", err);
-			sweetErrorHandling(err).then();
+			sweetPopupErrorHandling(Messages.LOGIN_REQUIRED).then();
+			navigate("/store/process/login");
 		}
 	};
 

@@ -1,4 +1,8 @@
-import { LoginInput, User, UserInput, UserUpdateInput } from "../../lib/types/user";
+import {
+	LoginInput,
+	User,
+	UserUpdateInput,
+} from "../../lib/types/user";
 import axios from "axios";
 import { serverApi } from "../../lib/config";
 
@@ -32,16 +36,21 @@ class UserService {
 		}
 	}
 
-	public async userSignup(input: UserInput): Promise<User> {
+	public async userSignup(formData: FormData): Promise<User> {
 		try {
-			const url = this.path + "/user/signup";
-			const result = await axios.post(url, input, { withCredentials: true });
+			const result = await axios.post(`${this.path}/user/signup`, formData, {
+				withCredentials: true,
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			});
 
 			const user: User = result.data.user;
 			localStorage.setItem("userData", JSON.stringify(user));
 
 			return user;
 		} catch (error) {
+			console.log("Error during signup =>", error);
 			throw error;
 		}
 	}

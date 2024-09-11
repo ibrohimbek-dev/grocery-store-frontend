@@ -5,9 +5,11 @@ interface GBInterface {
 	authUser: User | null;
 	setAuthUser: (user: User | null) => void;
 	darkMode: boolean;
-  setDarkMode: (darkMode: boolean) => void;
-  orderBuilder: Date;
-  setOrderBuilder: (input: Date) => void
+	setDarkMode: (darkMode: boolean) => void;
+	orderBuilder: Date;
+	setOrderBuilder: (input: Date) => void;
+	setUpdateNum: (num: number) => void;
+	updateNum: number;
 }
 
 export const GlobalContext = createContext<GBInterface | undefined>(undefined);
@@ -21,6 +23,5 @@ export const useGlobals = () => {
 
 	return context;
 };
-
 
 // DONE!
