@@ -1,6 +1,7 @@
 import {
 	LoginInput,
 	User,
+	UserPaymentInput,
 	UserUpdateInput,
 } from "../../lib/types/user";
 import axios from "axios";
@@ -104,6 +105,29 @@ class UserService {
 			return user;
 		} catch (error) {
 			console.log("Error on updateMember =>", error);
+			throw error;
+		}
+	}
+
+	public async userRegisterPaymentData(input: UserPaymentInput): Promise<void> {
+		try {
+			const url = this.path + "/user/add/payment";
+			await axios.post(url, input, { withCredentials: true });
+		} catch (error) {
+			console.log("Error on userRegisterPaymentData =>", error);
+			throw error;
+		}
+	}
+
+	public async getUserPaymentDataById(
+		userId: string
+	): Promise<UserPaymentInput> {
+		try {
+			const url = `${this.path}/user/payment/${userId}`;
+			const result = await axios.get(url, { withCredentials: true });
+			return result.data;
+		} catch (error) {
+			console.log("Error on getUserPaymentDataById =>", error);
 			throw error;
 		}
 	}

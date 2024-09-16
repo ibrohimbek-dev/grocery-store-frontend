@@ -17,3 +17,9 @@ export const retrieveFinishedOrders = createSelector(
 	selectOrderPage,
 	(OrderPage) => OrderPage.finishedOrders
 );
+
+export const retrieveUserPayment = createSelector(
+	selectOrderPage,
+	(OrderPage) => OrderPage.userPayment
+);
+

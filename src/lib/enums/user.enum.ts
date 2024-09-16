@@ -8,3 +8,10 @@ export enum UserStatus {
 	BLOCKED = "BLOCKED",
 	REMOVED = "REMOVED",
 }
+
+export enum UserPaymentCard {
+	MASTER_CARD = "MASTER CARD",
+	VISA = "VISA",
+	PAYPAL = "PAYPAL",
+	DISCOVER = "DISCOVER",
+}

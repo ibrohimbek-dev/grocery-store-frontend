@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from "react";
 import Navbar from "./components/header/Navbar";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Footer from "./components/footer/Footer";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import Events from "./components/events/Events";
 import useBasket from "./hooks/useBasket";
 import { useGlobals } from "./hooks/useGlobal";
@@ -16,7 +15,6 @@ import AuthenticationModal from "./components/auth";
 import "../css/main.css";
 import "../css/app.css";
 import UserPage from "./screens/user";
-import Example from "./sample/Example";
 const App = () => {
 	const { darkMode } = useGlobals();
 	const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = useBasket();
@@ -68,11 +66,10 @@ const App = () => {
 				ref={containerRef}
 				className="border-4 h-full overflow-x-hidden  border-red-500 flex flex-col justify-between items-center"
 			>
-				<div className={isRegister ? "hidden" : "flex"}>
-					{/* TODO: Later uncomment this line */}
-					{/* <div className="">
+				<div className={isRegister ? "hidden" : "flex flex-col"}>
+          <div className="">            
 						<Events />
-					</div> */}
+					</div>
 					<Navbar
 						cartItems={cartItems}
 						onAdd={onAdd}
@@ -96,9 +93,9 @@ const App = () => {
 						/>
 						<Route path="*" element={<Navigate to={"/"} replace />} />
 						<Route path="/store/orders" element={<OrdersPage />} />
+						<Route path="/store/orders/history" element={<OrdersPage />} />
 						<Route path="/store/process/*" element={<AuthenticationModal />} />
-						<Route path="/store/user-settings" element={<UserPage />} />
-						<Route path="/store/example" element={<Example />} />
+						<Route path="/store/user-settings" element={<UserPage />} />						
 					</Routes>
 				</div>
 

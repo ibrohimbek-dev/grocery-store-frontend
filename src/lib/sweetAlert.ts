@@ -12,6 +12,20 @@ export const sweetErrorHandling = async (err: any) => {
 	});
 };
 
+export const sweetErrorSmallHandling = async (err: any) => {
+	const error = err.response?.data ?? err;
+	const message = error?.message ?? Messages.SOMETHING_WENT_WRONG;
+	await Swal.fire({
+		icon: "error",
+		text: message,
+		showConfirmButton: false,
+		toast: true,
+		position: "top-end",				
+    timerProgressBar: true,
+    timer: 2000
+	});
+};
+
 export const sweetPopupErrorHandling = async (
 	msg: string,
 	duration: number = 2000
@@ -33,11 +47,11 @@ export const sweetTopSuccessAlert = async (
 		title: msg,
 		showConfirmButton: true,
 		confirmButtonText: "OK",
-		timer: duration, // Optional: This will still allow the alert to auto-close after the duration
+		timer: duration,
 		timerProgressBar: true,
-		position: "center", // Center the alert
-		backdrop: true, // Optional: Adds a backdrop
-		allowOutsideClick: false, // Prevents closing by clicking outside
+		position: "center",
+		backdrop: true,
+		allowOutsideClick: false,
 	});
 };
 
@@ -110,4 +124,17 @@ export const sweetFailureProvider = (
 			window.location.replace(forward_url);
 		}
 	});
+};
+
+export const sweetConfirmationAlert = async (msg: string, confirmation: string, cancel: string) => {
+	const { isConfirmed } = await Swal.fire({
+		title: "Confirmation",
+		text: msg,
+		icon: "question",
+		showCancelButton: true,
+		confirmButtonText: confirmation,
+		cancelButtonText: cancel,
+	});
+
+	return isConfirmed;
 };

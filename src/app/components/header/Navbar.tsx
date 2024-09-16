@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
-import ListRoundedIcon from "@mui/icons-material/ListRounded";
+import { TfiMenuAlt } from "react-icons/tfi";
 
 import { Menu, MenuItem } from "@mui/material";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
@@ -26,8 +26,7 @@ const Navbar = (props: BasketProps) => {
 	const navigate = useNavigate();
 
 	const location = useLocation();
-	const isOrdersPage = location.pathname === "/store/orders";
-	const isUserPage = location.pathname === "/store/user-settings";
+	const isHome = location.pathname === "/";
 
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
@@ -149,25 +148,22 @@ const Navbar = (props: BasketProps) => {
 			</div>
 
 			<div className="flex justify-between items-center">
-				<div className="flex w-1/5 space-x-2 justify-start items-center">
+				<div className="flex w-1/3 space-x-2 justify-start items-center">
 					<div onClick={handleClickSideBar} className="cursor-pointer">
-						<ListRoundedIcon sx={{ fontSize: 60 }} />
+						<TfiMenuAlt
+							title="open side bar"
+							className=" bg-green-600 rounded-xl text-6xl p-1"
+						/>
 					</div>
 					<NavLink
-						to={"/store/"}
-						className="text-[#bc6c25] cursor-pointer text-3xl font-bold"
+						to={"/"}
+						className="text-white py-1 px-2 rounded-lg bg-green-500 cursor-pointer text-3xl font-bold"
 					>
-						My Shop
+						My Fresh Market
 					</NavLink>
 				</div>
 
-				{isOrdersPage || isUserPage ? (
-					<div className="flex items-center shadow-2xl justify-center p-4 border rounded-lg">
-						<span className="font-semibold text-yellow-800">
-							Choose a shortcut or advance your journey!
-						</span>
-					</div>
-				) : (
+				{isHome && (
 					<div className="flex w-1/2 items-center justify-between p-4 bg-transform">
 						<div className="rounded-lg space-x-1 w-full flex items-center">
 							<input
@@ -216,7 +212,7 @@ const Navbar = (props: BasketProps) => {
 								<MenuItem onClick={handleClose}>
 									<NavLink
 										className={"hover:text-black hover:font-semibold w-full"}
-										to={"/my/order-history"}
+										to={"/store/orders/history"}
 									>
 										Order History
 									</NavLink>

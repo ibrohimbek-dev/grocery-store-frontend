@@ -1,4 +1,4 @@
-import { UserStatus, UserType } from "../enums/user.enum";
+import { UserPaymentCard, UserStatus, UserType } from "../enums/user.enum";
 
 export interface User {
 	_id: string;
@@ -27,13 +27,23 @@ export interface UserInput {
 	userPoints?: number;
 }
 
+export interface UserPaymentInput {
+	userId?: string;
+	cardType: UserPaymentCard;
+	cardNumber: string;
+	expirationDate: string;
+	cvv: string;
+	cardholderName: string;
+	createdAt?: Date;
+	updatedAt?: Date;
+}
+
 export interface LoginInput {
 	userNick: string;
 	userPassword: string;
 }
 
-export interface UserUpdateInput {
-	_id: string;
+export interface UserUpdateInput {	
 	userStatus?: UserStatus;
 	userNick?: string;
 	userPhone?: string;

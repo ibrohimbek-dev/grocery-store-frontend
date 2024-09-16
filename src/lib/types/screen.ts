@@ -1,4 +1,4 @@
-import { User } from "./user";
+import { User, UserPaymentInput } from "./user";
 import { Order } from "./order";
 import { Product } from "./product";
 
@@ -16,22 +16,18 @@ export interface ModalProductState {
 
 // HomePage PAGE TYPE INTERFACES:
 export interface HomePageState {
-	electronicsSection: [];
-	textTilesSection: [];
-	homeLivingSection: [];
-	beautyCareSection: [];
-	sportsOutdoorsSection: [];
-	toysGamesSection: [];
-	booksMediaSection: [];
-	grocerySection: [];
-	automotiveSection: [];
-	healthWellness: [];
+	freshProduceSection: [];
+	dairyProductsSection: [];
+	meatPoultrySection: [];
+	bakeryItemsSection: [];
+	cannedGoodsSection: [];
+	baveragesSection: [];
 	topUsers: [];
 }
 
 // PRODUCTS PAGE TYPE INTERFACES:
 export interface ProductsPageState {
-	shopOwner: User | null;
+	storeOwner: User | null;
 	chosenProduct: Product | null;
 	products: Product[];
 }
@@ -41,4 +37,5 @@ export interface OrderPageState {
 	pausedOrders: Order[];
 	processOrders: Order[];
 	finishedOrders: Order[];
+	userPayment: UserPaymentInput | null;
 }

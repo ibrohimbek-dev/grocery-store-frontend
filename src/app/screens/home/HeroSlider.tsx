@@ -16,6 +16,8 @@ const HeroSlider = () => {
 		"/img/assets/main-3.webp",
 		"/img/assets/main-4.webp",
 		"/img/assets/main-5.webp",
+		"/img/assets/main-6.webp",
+		"/img/assets/main-7.webp",
 	];
 
 	SwiperCore.use([FreeMode, Navigation, Thumbs, Autoplay, Pagination]);
@@ -27,7 +29,7 @@ const HeroSlider = () => {
 					className="h-auto w-full rounded-md overflow-hidden swiper-area"
 					loop={true}
 					spaceBetween={10}
-					navigation={false}
+					navigation={true}
 					modules={[FreeMode, Navigation, Thumbs, Autoplay]}
 					centeredSlides={false}
 					initialSlide={0}
@@ -41,7 +43,7 @@ const HeroSlider = () => {
 					{images?.length > 0 &&
 						images?.map((url, index) => (
 							<SwiperSlide
-								className="overflow-hidden flex justify-center items-center h-auto"
+								className="overflow-hidden h-auto w-auto flex justify-center items-center"
 								key={index}
 							>
 								<img

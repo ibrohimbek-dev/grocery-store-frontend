@@ -39,6 +39,18 @@ class ProductService {
 
 			return result.data;
 		} catch (error) {
+			console.log("Error on increaseView =>", error);
+			throw error;
+		}
+  }
+  
+	public async getProductById(productId: string): Promise<Product> {
+		try {
+			const url = `${this.path}/user/product/${productId}`;
+			const result = await axios.get(url, { withCredentials: true });
+
+			return result.data;
+		} catch (error) {
 			console.log("Error on getProductById =>", error);
 			throw error;
 		}

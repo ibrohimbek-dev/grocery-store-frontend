@@ -50,7 +50,7 @@ const Events = () => {
 						<div className="flex h-auto justify-around w-full">
 							<div className="w-1/4 mr-4">
 								<img
-									src="/gifs/gif4.gif"
+									src="/gifs/gif1.gif"
 									alt="Ads 1"
 									className="w-full h-32 object-contain"
 								/>
@@ -69,10 +69,31 @@ const Events = () => {
 									className="w-full h-32 object-contain"
 								/>
 							</div>
+							<div className="w-1/4 mr-4">
+								<img
+									src="/gifs/gif4.gif"
+									alt="Ads 4"
+									className="w-full h-32 object-contain"
+								/>
+							</div>
+							<div className="w-1/4 mr-4">
+								<img
+									src="/gifs/gif5.gif"
+									alt="Ads 5"
+									className="w-full h-32 object-contain"
+								/>
+							</div>
+							<div className="w-1/4 mr-4">
+								<img
+									src="/gifs/gif6.gif"
+									alt="Ads 6"
+									className="w-full h-32 object-contain"
+								/>
+							</div>
 							<div className="w-1/4">
 								<img
-									src="/gifs/gif1.gif"
-									alt="Ads 4"
+									src="/gifs/gif7.gif"
+									alt="Ads 7"
 									className="w-full h-32 object-contain"
 								/>
 							</div>

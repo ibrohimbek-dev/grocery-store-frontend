@@ -134,6 +134,5 @@ const Container = ({
 	);
 };
 
-// FIXME:
 
 export default Container;

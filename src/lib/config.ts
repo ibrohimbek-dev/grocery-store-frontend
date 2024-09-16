@@ -20,6 +20,11 @@ export const Messages = {
 	INVALID_CVV: "Invalid CVV. Please enter a 3-digit number.",
 	CARD_HOLDER_EMPTY: "Cardholder name cannot be empty.",
 	CARD_VALIDATED: "Your card validated successfully!",
-  CARD_TYPE_REQUIRED: "Select your card type!",
-  ADD_YOUR_CARD: "To continue, add your credit card first!"
+	CARD_TYPE_REQUIRED: "Select your card type!",
+	ADD_YOUR_CARD: "To continue, add your credit card first!",
+	RECEIVED_ORDER: "Have you received your order?",
+	PAYMENT_PROCCEED: "Do you want to proceed with payment?",
+  CANCEL_ORDER: "Do you want to cancel this order?",
+  DELETE_HISTORY: "Do you want to delete this order history?",
+  DELETED_SUCCESSFULLY: "Order history deleted successfully!"
 };

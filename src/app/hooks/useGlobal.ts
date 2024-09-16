@@ -3,7 +3,7 @@ import { User } from "../../lib/types/user";
 
 interface GBInterface {
 	authUser: User | null;
-	setAuthUser: (user: User | null) => void;
+	setAuthUser: (user: User | null) => void;	
 	darkMode: boolean;
 	setDarkMode: (darkMode: boolean) => void;
 	orderBuilder: Date;

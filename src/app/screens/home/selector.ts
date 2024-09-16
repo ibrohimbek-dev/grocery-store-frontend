@@ -1,49 +1,39 @@
-import { AppRootState } from "../../../lib/types/screen";
 import { createSelector } from "@reduxjs/toolkit";
+import { AppRootState, HomePageState } from "../../../lib/types/screen";
 
 const selectHomePage = (state: AppRootState) => state.homePage;
 
-export const retrieveElectronics = createSelector(
+export const retrieveFreshProduce = createSelector(
 	selectHomePage,
-	(HomePage) => HomePage.electronicsSection
+	(homePage: HomePageState) => homePage.freshProduceSection
 );
-export const retrieveTextTiles = createSelector(
+
+export const retrieveDairyProducts = createSelector(
 	selectHomePage,
-	(HomePage) => HomePage.textTilesSection
+	(homePage: HomePageState) => homePage.dairyProductsSection
 );
-export const retrieveHomeLiving = createSelector(
+
+export const retrieveMeatPoultry = createSelector(
 	selectHomePage,
-	(HomePage) => HomePage.homeLivingSection
+	(homePage: HomePageState) => homePage.meatPoultrySection
 );
-export const retrieveBeautyCare = createSelector(
+
+export const retrieveBakeryItems = createSelector(
 	selectHomePage,
-	(HomePage) => HomePage.beautyCareSection
+	(homePage: HomePageState) => homePage.bakeryItemsSection
 );
-export const retrieveSportOutdoors = createSelector(
+
+export const retrieveCannedGoods = createSelector(
 	selectHomePage,
-	(HomePage) => HomePage.sportsOutdoorsSection
+	(homePage: HomePageState) => homePage.cannedGoodsSection
 );
-export const retrieveToysGames = createSelector(
+
+export const retrieveBeverages = createSelector(
 	selectHomePage,
-	(HomePage) => HomePage.toysGamesSection
+	(homePage: HomePageState) => homePage.baveragesSection
 );
-export const retrieveBooksMedia = createSelector(
-	selectHomePage,
-	(HomePage) => HomePage.booksMediaSection
-);
-export const retrieveGrocery = createSelector(
-	selectHomePage,
-	(HomePage) => HomePage.grocerySection
-);
-export const retrieveAutomotive = createSelector(
-	selectHomePage,
-	(HomePage) => HomePage.automotiveSection
-);
-export const retrieveHealthWellness = createSelector(
-	selectHomePage,
-	(HomePage) => HomePage.healthWellness
-);
+
 export const retrieveTopUsers = createSelector(
 	selectHomePage,
-	(HomePage) => HomePage.topUsers
+	(homePage: HomePageState) => homePage.topUsers
 );

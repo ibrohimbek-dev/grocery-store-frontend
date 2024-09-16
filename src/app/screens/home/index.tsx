@@ -7,34 +7,19 @@ import { User } from "../../../lib/types/user";
 import UserService from "../../services/UserService";
 import HeroSlider from "./HeroSlider";
 import { ProductCollection } from "../../../lib/enums/product.enum";
-import TextTiles from "./TextTiles";
-
-import BeautyCare from "./BeautyCare";
-import SportsOutdoors from "./SportsOutdoors";
-import ToysGames from "./ToysGames";
-import BooksMedia from "./BooksMedia";
-import Grocery from "./Grocery";
-import Automotive from "./Automotive";
-import HealthWellness from "./HealthWellness";
-import HomeLiving from "./HomeLiving";
 import {
-	setAutomotive,
-	setBakeryItems,
-	setBooksMedia,
 	setFreshProduce,
-	setGrocery,
-	setHealthWellness,
 	setMeatPoultry,
 	setCannedFoods,
 	setDairyProducts,
 	setTopUsers,
 	setBeverages,
+	setBakeryItems,
 } from "./slice";
-import Electronics from "./Electronics";
-import AdsMediaSection from "./AdsMediaSection";
 import TopUsers from "./TopUsers";
 import { CardActionsProps } from "../../../lib/types/common";
 import { useGlobals } from "../../hooks/useGlobal";
+import FreshProduce from "./FreshProduce";
 
 // REDUX SLICE:
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -44,10 +29,6 @@ const actionDispatch = (dispatch: Dispatch) => ({
 	setBakeryItems: (data: Product[]) => dispatch(setBakeryItems(data)),
 	setCannedFoods: (data: Product[]) => dispatch(setCannedFoods(data)),
 	setBeverages: (data: Product[]) => dispatch(setBeverages(data)),
-	setBooksMedia: (data: Product[]) => dispatch(setBooksMedia(data)),
-	setGrocery: (data: Product[]) => dispatch(setGrocery(data)),
-	setAutomotive: (data: Product[]) => dispatch(setAutomotive(data)),
-	setHealthWellness: (data: Product[]) => dispatch(setHealthWellness(data)),
 	setTopUsers: (data: User[]) => dispatch(setTopUsers(data)),
 });
 
@@ -142,23 +123,13 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 
 	return (
 		<div className="border-4 border-yellow-400 overflow-hidden w-full flex flex-row justify-center items-center">
-			<div className="flex flex-col w-full items-center space-y-10 mt-4">
+			<div className="flex flex-col w-full items-center space-y-10 mt-4">			
 				<HeroSlider />
-				<Electronics
+				<FreshProduce
 					cartItems={cartItems}
 					onAdd={onAdd}
 					onDeleteAll={onDeleteAll}
 				/>
-				<TextTiles />
-				<HomeLiving />
-				<BeautyCare />
-				<SportsOutdoors />
-				<ToysGames />
-				<BooksMedia />
-				<Grocery />
-				<Automotive />
-				<HealthWellness />
-				<AdsMediaSection />
 				<TopUsers />
 			</div>
 		</div>

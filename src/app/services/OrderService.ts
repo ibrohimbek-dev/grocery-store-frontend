@@ -66,7 +66,18 @@ class OrderService {
 			throw error;
 		}
 	}
+	public async deleteOrderHistory(orderId: string): Promise<Order> {
+		try {
+			const url = `${this.path}/user/order/delete/history/${orderId}`; 
 
+			const result = await axios.delete(url, { withCredentials: true });
+
+			return result.data;
+		} catch (error) {
+			console.log("Error on deleteOrderHistory =>", error);
+			throw error;
+		}
+	}
 }
 
 export default OrderService;

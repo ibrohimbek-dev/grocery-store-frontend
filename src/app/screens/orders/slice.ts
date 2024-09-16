@@ -5,6 +5,7 @@ const initialState: OrderPageState = {
 	pausedOrders: [],
 	processOrders: [],
 	finishedOrders: [],
+	userPayment: null,
 };
 
 const orderPageSlice = createSlice({
@@ -20,11 +21,18 @@ const orderPageSlice = createSlice({
 		setFinishedOrders: (state, action) => {
 			state.finishedOrders = action.payload;
 		},
+		setUserPayment: (state, action) => {
+			state.userPayment = action.payload;
+		},
 	},
 });
 
-export const { setPausedOrders, setProcessOrders, setFinishedOrders } =
-	orderPageSlice.actions;
+export const {
+	setPausedOrders,
+	setProcessOrders,
+	setFinishedOrders,
+	setUserPayment,
+} = orderPageSlice.actions;
 
 const OrderPageReducer = orderPageSlice.reducer;
 

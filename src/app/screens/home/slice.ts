@@ -2,16 +2,12 @@ import { HomePageState } from "../../../lib/types/screen";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: HomePageState = {
-	electronicsSection: [],
-	textTilesSection: [],
-	homeLivingSection: [],
-	beautyCareSection: [],
-	sportsOutdoorsSection: [],
-	toysGamesSection: [],
-	booksMediaSection: [],
-	grocerySection: [],
-	automotiveSection: [],
-	healthWellness: [],
+	freshProduceSection: [],
+	dairyProductsSection: [],
+	meatPoultrySection: [],
+	bakeryItemsSection: [],
+	cannedGoodsSection: [],
+	baveragesSection: [],
 	topUsers: [],
 };
 
@@ -20,34 +16,22 @@ const homePageSlice = createSlice({
 	initialState,
 	reducers: {
 		setFreshProduce: (state, action) => {
-			state.electronicsSection = action.payload;
+			state.freshProduceSection = action.payload;
 		},
 		setDairyProducts: (state, action) => {
-			state.textTilesSection = action.payload;
+			state.dairyProductsSection = action.payload;
 		},
 		setMeatPoultry: (state, action) => {
-			state.homeLivingSection = action.payload;
+			state.meatPoultrySection = action.payload;
 		},
 		setBakeryItems: (state, action) => {
-			state.beautyCareSection = action.payload;
+			state.bakeryItemsSection = action.payload;
 		},
 		setCannedFoods: (state, action) => {
-			state.sportsOutdoorsSection = action.payload;
+			state.cannedGoodsSection = action.payload;
 		},
 		setBeverages: (state, action) => {
-			state.toysGamesSection = action.payload;
-		},
-		setBooksMedia: (state, action) => {
-			state.booksMediaSection = action.payload;
-		},
-		setGrocery: (state, action) => {
-			state.grocerySection = action.payload;
-		},
-		setAutomotive: (state, action) => {
-			state.automotiveSection = action.payload;
-		},
-		setHealthWellness: (state, action) => {
-			state.healthWellness = action.payload;
+			state.baveragesSection = action.payload;
 		},
 		setTopUsers: (state, action) => {
 			state.topUsers = action.payload;
@@ -62,10 +46,6 @@ export const {
 	setBakeryItems,
 	setCannedFoods,
 	setBeverages,
-	setBooksMedia,
-	setGrocery,
-	setAutomotive,
-	setHealthWellness,
 	setTopUsers,
 } = homePageSlice.actions;
 
