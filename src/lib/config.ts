@@ -26,5 +26,6 @@ export const Messages = {
 	PAYMENT_PROCCEED: "Do you want to proceed with payment?",
   CANCEL_ORDER: "Do you want to cancel this order?",
   DELETE_HISTORY: "Do you want to delete this order history?",
-  DELETED_SUCCESSFULLY: "Order history deleted successfully!"
+  DELETED_SUCCESSFULLY: "Order history deleted successfully!",
+  SEND_SUCCESSFULLY: "Message send successfully!"
 };

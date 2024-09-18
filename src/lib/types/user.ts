@@ -29,7 +29,6 @@ export interface UserInput {
 	userPoints?: number;
 }
 
-
 export interface UserInquiry {
 	order: string;
 	page: number;
@@ -53,7 +52,7 @@ export interface LoginInput {
 	userPassword: string;
 }
 
-export interface UserUpdateInput {	
+export interface UserUpdateInput {
 	userStatus?: UserStatus;
 	userNick?: string;
 	userPhone?: string;
@@ -62,3 +61,4 @@ export interface UserUpdateInput {
 	userDesc?: string;
 	userImage?: string;
 }
+

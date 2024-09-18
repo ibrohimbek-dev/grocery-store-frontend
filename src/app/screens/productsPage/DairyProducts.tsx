@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { CardActionsProps } from "../../../lib/types/common";
 import { Dispatch, createSelector } from "@reduxjs/toolkit";
 import { Product, ProductInquiry } from "../../../lib/types/product";
-import { setDiaryProducts } from "./slice";
+import { setDairyProducts } from "./slice";
 import { retrieveDairyProducts } from "./selector";
 import { useDispatch, useSelector } from "react-redux";
 import { ProductCollection } from "../../../lib/enums/product.enum";
@@ -11,17 +11,17 @@ import Container from "./Container";
 
 // REDUX SLICE & SELEVCTOR:
 const actionDispatch = (dispatch: Dispatch) => ({
-	setDiaryProducts: (data: Product[]) => dispatch(setDiaryProducts(data)),
+	setDairyProducts: (data: Product[]) => dispatch(setDairyProducts(data)),
 });
 
-const diaryProductsRetriever = createSelector(
+const dairyProductsRetriever = createSelector(
 	retrieveDairyProducts,
-	(diaryProductsSection) => ({ diaryProductsSection })
+	(dairyProductsSection) => ({ dairyProductsSection })
 );
 
 const DairyProducts = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
-	const { setDiaryProducts } = actionDispatch(useDispatch());
-	const { diaryProductsSection } = useSelector(diaryProductsRetriever);
+	const { setDairyProducts } = actionDispatch(useDispatch());
+	const { dairyProductsSection } = useSelector(dairyProductsRetriever);
 
 	const [productSearch, setProductSearch] = useState<ProductInquiry>({
 		page: 1,
@@ -36,16 +36,15 @@ const DairyProducts = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 
 		productService
 			.getProductsBySort(productSearch)
-			.then((data) => setDiaryProducts(data))
+			.then((data) => setDairyProducts(data))
 			.catch((er) => console.log("Error on DairyProducts.tsx"));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [productSearch]);
-
-	console.log("diaryProductsSection => ", diaryProductsSection);
+	
 	return (
 		<Container
-			productData={diaryProductsSection}
-			sectionName="Diary Products"
+			productData={dairyProductsSection}
+			sectionName="Dairy Products"
 			onAdd={onAdd}
 			onDeleteAll={onDeleteAll}
 			cartItems={cartItems}

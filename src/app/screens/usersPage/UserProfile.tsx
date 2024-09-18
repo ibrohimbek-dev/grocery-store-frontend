@@ -24,7 +24,7 @@ const UserProfile = () => {
 		>
 			<div className="flex flex-col items-center">
 				<div className="relative mb-4">
-					<div className="w-28 h-28 rounded-full overflow-hidden border-4 border-blue-500">
+					<div className="w-28 h-28 rounded-full overflow-hidden">
 						<img
 							alt="User Avatar"
 							src={

@@ -10,7 +10,7 @@ export const retrieveFreshProduce = createSelector(
 
 export const retrieveDairyProducts = createSelector(
 	selectProductsPage,
-	(ProductPage) => ProductPage.diaryProductsSection
+	(ProductPage) => ProductPage.dairyProductsSection
 );
 
 export const retrieveMeatPoultry = createSelector(

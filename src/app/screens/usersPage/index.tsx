@@ -17,7 +17,7 @@ const UserPage = () => {
 			animate={{ scale: 1 }}
 			exit={{ scale: 0.8 }}
 			transition={{ duration: 0.3 }}
-			className="flex w-full border-4 bg-gray-50 min-h-screen"
+			className="flex w-full bg-gray-50 min-h-screen"
 		>
 			{/* Left Section */}
 			<UserSettings />

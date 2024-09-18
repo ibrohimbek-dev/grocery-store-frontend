@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
-import { TfiMenuAlt } from "react-icons/tfi";
 
 import { Menu, MenuItem } from "@mui/material";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
@@ -18,11 +17,19 @@ import { Messages } from "../../../lib/config";
 import UserService from "../../services/UserService";
 import OrderService from "../../services/OrderService";
 import { motion } from "framer-motion";
+import { MdOutlineMenuOpen } from "react-icons/md";
 
 const Navbar = (props: BasketProps) => {
 	const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
-	const { authUser, darkMode, setDarkMode, setAuthUser, setOrderBuilder } =
-		useGlobals();
+	const {
+		authUser,
+		darkMode,
+		setDarkMode,
+		setAuthUser,
+		setOrderBuilder,
+		setOpenSidebar,
+		openSidebar,
+	} = useGlobals();
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const [open, setOpen] = useState<boolean>(false);
 	const navigate = useNavigate();
@@ -57,7 +64,7 @@ const Navbar = (props: BasketProps) => {
 	};
 
 	const handleClickSideBar = () => {
-		alert("Side bar coming soon!");
+		setOpenSidebar(!openSidebar);
 	};
 
 	const handleClickSearch = () => {
@@ -108,14 +115,25 @@ const Navbar = (props: BasketProps) => {
 		}
 	};
 
+	const sellHandleClick = () => {
+		sweetTopSmallInfoAlert(Messages.COMING_SOON).then();
+	};
+
 	return (
-		<motion.div className="main-container flex flex-col">
+		<motion.div
+			initial={{ scale: 0.8 }}
+			animate={{ scale: 1 }}
+			exit={{ scale: 0.8 }}
+			transition={{ duration: 0.3 }}
+			className="flex flex-col main-container"
+		>
 			<div className="flex justify-between">
 				<div className="flex justify-center items-center">
 					<NavLink
 						className={"border rounded-md bg-[#b0c4b1] p-1 text-sm"}
 						to={"#"}
 						title="sell your items"
+						onClick={sellHandleClick}
 					>
 						#sell
 					</NavLink>
@@ -160,18 +178,20 @@ const Navbar = (props: BasketProps) => {
 
 			<div className="flex justify-between items-center">
 				<div className="flex w-1/3 space-x-2 justify-start items-center">
-					<div onClick={handleClickSideBar} className="cursor-pointer">
-						<TfiMenuAlt
-							title="open side bar"
-							className=" bg-green-600 rounded-xl text-6xl p-1"
-						/>
+					<div className="flex flex-row items-center justify-center">
+						<div onClick={handleClickSideBar} className="cursor-pointer">
+							<MdOutlineMenuOpen
+								title="open side bar"
+								className="rounded-xl text-5xl text-blue-900"
+							/>
+						</div>
+						<NavLink
+							to={"/"}
+							className="text-green-500 py-1 px-2 rounded-lg cursor-pointer text-3xl font-bold"
+						>
+							My Fresh Market
+						</NavLink>
 					</div>
-					<NavLink
-						to={"/"}
-						className="text-white py-1 px-2 rounded-lg bg-green-500 cursor-pointer text-3xl font-bold"
-					>
-						My Fresh Market
-					</NavLink>
 				</div>
 
 				{isHome && (

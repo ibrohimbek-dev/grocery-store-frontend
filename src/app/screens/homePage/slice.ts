@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: HomePageState = {
 	freshProduceSection: [],
-	diaryProductsSection: [],
+	dairyProductsSection: [],
 	meatPoultrySection: [],
 	bakeryItemsSection: [],
 	cannedGoodsSection: [],
@@ -18,8 +18,8 @@ const homePageSlice = createSlice({
 		setFreshProduce: (state, action) => {
 			state.freshProduceSection = action.payload;
 		},
-		setDiaryProducts: (state, action) => {
-			state.diaryProductsSection = action.payload;
+		setDairyProducts: (state, action) => {
+			state.dairyProductsSection = action.payload;
 		},
 		setMeatPoultry: (state, action) => {
 			state.meatPoultrySection = action.payload;
@@ -41,7 +41,7 @@ const homePageSlice = createSlice({
 
 export const {
 	setFreshProduce,
-	setDiaryProducts,
+	setDairyProducts,
 	setMeatPoultry,
 	setBakeryItems,
 	setCannedFoods,

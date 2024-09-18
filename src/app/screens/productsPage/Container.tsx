@@ -148,7 +148,7 @@ const Container: React.FC<ContainerProps> = ({
 				</div>
 
 				{/* Render product data */}
-				<div className="w-full border-4">
+				<div className="w-full">
 					<div className="text-4xl font-bold mb-4">{sectionName}</div>
 					<div className="grid p-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
 						{productData.length > 0 ? (

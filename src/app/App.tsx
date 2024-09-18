@@ -16,10 +16,12 @@ import UserPage from "./screens/usersPage";
 import ProductsPage from "./screens/productsPage";
 import { AnimatePresence } from "framer-motion";
 import ActiveUsers from "./screens/usersPage/ActiveUsers";
+import HelpPage from "./screens/helpPage";
+import Sidebar from "./components/sidebar/Sidebar";
+import { motion } from "framer-motion";
 
 import "../css/main.css";
 import "../css/app.css";
-import HelpPage from "./screens/helpPage";
 
 const App = () => {
 	const { darkMode } = useGlobals();
@@ -30,6 +32,8 @@ const App = () => {
 	const isRegister =
 		location.pathname === "/store/process/login" ||
 		location.pathname === "/store/process/signup";
+
+	const isHome = location.pathname === "/";
 
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const resizeTimeout = useRef<NodeJS.Timeout | null>(null); // Use useRef to persist the timeout
@@ -71,22 +75,41 @@ const App = () => {
 			<AnimatePresence>
 				<div
 					ref={containerRef}
-					className="border-4 h-full overflow-x-hidden  border-red-500 flex flex-col justify-between items-center"
+					className="h-full overflow-x-hidden flex flex-col justify-between items-center"
 				>
-					<div className={isRegister ? "hidden" : "flex flex-col"}>
-						<div className="">
+					<div
+						className={
+							isRegister
+								? "hidden"
+								: "flex space-y-2 flex-col mx-auto w-full justify-center items-center"
+						}
+					>
+						<div className={isHome ? "flex relative w-full" : "hidden"}>
 							<Events />
 						</div>
-						<Navbar
-							cartItems={cartItems}
-							onAdd={onAdd}
-							onRemove={onRemove}
-							onDelete={onDelete}
-							onDeleteAll={onDeleteAll}
-						/>
+						<motion.div
+							initial={{ opacity: 0, scale: 0.95, y: 20 }}
+							animate={{ opacity: 1, scale: 1, y: 0 }}
+							exit={{ opacity: 0, scale: 0.95, y: 20 }}
+							transition={{ duration: 0.5, ease: "easeInOut" }}
+						>
+							<Navbar
+								cartItems={cartItems}
+								onAdd={onAdd}
+								onRemove={onRemove}
+								onDelete={onDelete}
+								onDeleteAll={onDeleteAll}
+							/>
+						</motion.div>
 					</div>
 
-					<div className="border-4 border-green-500 main-container">
+					<motion.div
+						className="main-container"
+						initial={{ opacity: 0, scale: 0.95, y: 20 }}
+						animate={{ opacity: 1, scale: 1, y: 0 }}
+						exit={{ opacity: 0, scale: 0.95, y: 20 }}
+						transition={{ duration: 0.5, ease: "easeInOut" }}
+					>
 						<Routes>
 							<Route
 								path="/"
@@ -122,9 +145,13 @@ const App = () => {
 								}
 							/>
 						</Routes>
-					</div>
+					</motion.div>
 
 					<Footer />
+
+					<>
+						<Sidebar />
+					</>
 				</div>
 			</AnimatePresence>
 		</ThemeProvider>

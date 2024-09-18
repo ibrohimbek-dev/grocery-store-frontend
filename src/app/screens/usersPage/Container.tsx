@@ -154,7 +154,7 @@ const Container: React.FC<ContainerProps> = ({
 				</div>
 
 				{/* Render user data */}
-				<div className="w-full border-4">
+				<div className="w-full">
 					<div className="grid p-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
 						{usersData.length > 0 ? (
 							usersData.map((user) => {

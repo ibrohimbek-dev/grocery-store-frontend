@@ -11,7 +11,7 @@ import {
 	setFreshProduce,
 	setMeatPoultry,
 	setCannedFoods,
-	setDiaryProducts,
+	setDairyProducts,
 	setTopUsers,
 	setBeverages,
 	setBakeryItems,
@@ -30,7 +30,7 @@ import { motion } from "framer-motion";
 // REDUX SLICE:
 const actionDispatch = (dispatch: Dispatch) => ({
 	setFreshProduce: (data: Product[]) => dispatch(setFreshProduce(data)),
-	setDiaryProducts: (data: Product[]) => dispatch(setDiaryProducts(data)),
+	setDairyProducts: (data: Product[]) => dispatch(setDairyProducts(data)),
 	setMeatPoultry: (data: Product[]) => dispatch(setMeatPoultry(data)),
 	setBakeryItems: (data: Product[]) => dispatch(setBakeryItems(data)),
 	setCannedFoods: (data: Product[]) => dispatch(setCannedFoods(data)),
@@ -41,7 +41,7 @@ const actionDispatch = (dispatch: Dispatch) => ({
 const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 	const {
 		setFreshProduce,
-		setDiaryProducts,
+		setDairyProducts,
 		setMeatPoultry,
 		setBakeryItems,
 		setCannedFoods,
@@ -73,8 +73,8 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 				order: "productViews",
 				productCollection: ProductCollection.DAIRY_PRODUCTS,
 			})
-			.then((data) => setDiaryProducts(data))
-			.catch((err) => console.log("Error on data setDiaryProducts =>", err));
+			.then((data) => setDairyProducts(data))
+			.catch((err) => console.log("Error on data setDairyProducts =>", err));
 
 		productService
 			.getProductsBySort({
@@ -131,7 +131,7 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 			animate={{ scale: 1 }}
 			exit={{ scale: 0.8 }}
 			transition={{ duration: 0.3 }}
-			className="border-4 border-yellow-400 overflow-hidden w-full flex flex-row justify-center items-center"
+			className=" overflow-hidden w-full flex flex-row justify-center items-center"
 		>
 			<div className="flex flex-col w-full items-center space-y-10 mt-4">
 				<HeroSlider />
@@ -172,5 +172,8 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 		</motion.div>
 	);
 };
+
+
+// TODO: Shu qismiga keldim. Sh qismiga contact float icon qo'shishim kerak
 
 export default HomePage;

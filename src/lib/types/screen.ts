@@ -22,7 +22,7 @@ export interface UsersPagetState {
 // HomePage PAGE TYPE INTERFACES:
 export interface HomePageState {
 	freshProduceSection: Product[];
-	diaryProductsSection: Product[];
+	dairyProductsSection: Product[];
 	meatPoultrySection: Product[];
 	bakeryItemsSection: Product[];
 	cannedGoodsSection: Product[];
@@ -33,7 +33,7 @@ export interface HomePageState {
 // PRODUCTS PAGE TYPE INTERFACES:
 export interface ProductsPageState {
 	freshProduceSection: Product[];
-	diaryProductsSection: Product[];
+	dairyProductsSection: Product[];
 	meatPoultrySection: Product[];
 	bakeryItemsSection: Product[];
 	cannedGoodsSection: Product[];

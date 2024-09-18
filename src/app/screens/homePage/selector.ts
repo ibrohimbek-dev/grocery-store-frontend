@@ -10,7 +10,7 @@ export const retrieveFreshProduce = createSelector(
 
 export const retrieveDairyProducts = createSelector(
 	selectHomePage,
-	(HomePage: HomePageState) => HomePage.diaryProductsSection
+	(HomePage: HomePageState) => HomePage.dairyProductsSection
 );
 
 export const retrieveMeatPoultry = createSelector(

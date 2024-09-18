@@ -3,13 +3,16 @@ import { User } from "../../lib/types/user";
 
 interface GBInterface {
 	authUser: User | null;
-	setAuthUser: (user: User | null) => void;	
+	setAuthUser: (user: User | null) => void;
 	darkMode: boolean;
 	setDarkMode: (darkMode: boolean) => void;
 	orderBuilder: Date;
 	setOrderBuilder: (input: Date) => void;
 	setUpdateNum: (num: number) => void;
 	updateNum: number;
+	openSidebar: boolean;
+  setOpenSidebar: (input: boolean) => void;
+  
 }
 
 export const GlobalContext = createContext<GBInterface | undefined>(undefined);
