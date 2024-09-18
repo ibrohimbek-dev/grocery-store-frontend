@@ -32,18 +32,18 @@ class ProductService {
 		}
 	}
 
-	public async increaseView(productId: string): Promise<Product> {
+	public async increaseProductView(productId: string): Promise<Product> {
 		try {
 			const url = `${this.path}/user/product/${productId}`;
 			const result = await axios.get(url, { withCredentials: true });
 
 			return result.data;
 		} catch (error) {
-			console.log("Error on increaseView =>", error);
+			console.log("Error on increaseProductView =>", error);
 			throw error;
 		}
-  }
-  
+	}
+
 	public async getProductById(productId: string): Promise<Product> {
 		try {
 			const url = `${this.path}/user/product/${productId}`;

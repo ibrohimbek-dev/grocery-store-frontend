@@ -14,7 +14,7 @@ import { Messages, serverApi } from "../../../lib/config";
 import { OrderUpdateInput } from "../../../lib/types/order";
 import { OrderStatus } from "../../../lib/enums/order.enum";
 import OrderService from "../../services/OrderService";
-import { Button, Stack, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import TabPanel from "@mui/lab/TabPanel";
 import { FaTimes, FaRegFrown, FaCheckCircle, FaEquals } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
@@ -24,6 +24,7 @@ import OrderModal from "./OrderModal";
 import ProductService from "../../services/ProductService";
 import { Product } from "../../../lib/types/product";
 import moment from "moment";
+import { motion } from "framer-motion";
 
 // REDUX SLICE & SELECTOR:
 const pausedOrdersRetriever = createSelector(
@@ -132,7 +133,13 @@ const PausedOrders = ({ setValue }: PausedOrdersProps) => {
 	return (
 		<>
 			<TabPanel value="1">
-				<Stack spacing={4}>
+				<motion.div
+					initial={{ scale: 0.8 }}
+					animate={{ scale: 1 }}
+					exit={{ scale: 0.8 }}
+					transition={{ duration: 0.3 }}
+					className="space-y-2"
+				>
 					{pausedOrders?.length > 0 ? (
 						pausedOrders.map((order) => {
 							return (
@@ -140,7 +147,7 @@ const PausedOrders = ({ setValue }: PausedOrdersProps) => {
 									key={order._id}
 									className="bg-white shadow-lg rounded-lg p-4"
 								>
-									<div className="overflow-y-auto max-h-60">
+									<div className="overflow-y-auto space-y-2 max-h-60">
 										{order?.orderItems?.map((orderItem) => {
 											const product = order.productData.find(
 												(ele) => orderItem.productId === ele._id
@@ -151,7 +158,7 @@ const PausedOrders = ({ setValue }: PausedOrdersProps) => {
 											return (
 												<div
 													key={orderItem._id}
-													className="flex items-center mb-4"
+													className="flex items-center border rounded-md"
 												>
 													<div
 														title="Show item detail!"
@@ -283,7 +290,7 @@ const PausedOrders = ({ setValue }: PausedOrdersProps) => {
 							</div>
 						</div>
 					)}
-				</Stack>
+				</motion.div>
 			</TabPanel>
 
 			<>

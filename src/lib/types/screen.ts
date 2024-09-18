@@ -8,28 +8,39 @@ export interface AppRootState {
 	productPage: ProductsPageState;
 	orderPage: OrderPageState;
 	modalPage: ModalProductState;
+	usersPage: UsersPagetState;
 }
 
 export interface ModalProductState {
 	modalProduct: Product | null;
 }
 
+export interface UsersPagetState {
+	activeUsers: User[];
+}
+
 // HomePage PAGE TYPE INTERFACES:
 export interface HomePageState {
-	freshProduceSection: [];
-	dairyProductsSection: [];
-	meatPoultrySection: [];
-	bakeryItemsSection: [];
-	cannedGoodsSection: [];
-	baveragesSection: [];
-	topUsers: [];
+	freshProduceSection: Product[];
+	diaryProductsSection: Product[];
+	meatPoultrySection: Product[];
+	bakeryItemsSection: Product[];
+	cannedGoodsSection: Product[];
+	baveragesSection: Product[];
+	topUsers: User[];
 }
 
 // PRODUCTS PAGE TYPE INTERFACES:
 export interface ProductsPageState {
-	storeOwner: User | null;
-	chosenProduct: Product | null;
-	products: Product[];
+	freshProduceSection: Product[];
+	diaryProductsSection: Product[];
+	meatPoultrySection: Product[];
+	bakeryItemsSection: Product[];
+	cannedGoodsSection: Product[];
+	baveragesSection: Product[];
+	discounts: Product[];
+	recommends: Product[];
+	ads: Product[];
 }
 
 // ORDERS PAGE TYPE INTERFACES:

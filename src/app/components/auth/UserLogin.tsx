@@ -9,6 +9,7 @@ import UserService from "../../services/UserService";
 import { sweetErrorHandling } from "../../../lib/sweetAlert";
 import { NavLink } from "react-router-dom";
 import { Button } from "@mui/material";
+import { motion } from "framer-motion";
 
 const UserLogin = () => {
 	const loginBgImage = "/img/assets/login-bg.webp";
@@ -70,7 +71,10 @@ const UserLogin = () => {
 	};
 
 	return (
-		<div className="w-full h-screen flex justify-center">
+		<motion.div initial={{ scale: 0.8 }}
+				animate={{ scale: 1 }}
+				exit={{ scale: 0.8 }}
+				transition={{ duration: 0.3 }}				 className="w-full h-screen flex justify-center">
 			{imgLoad ? (
 				<img
 					alt="background"
@@ -156,7 +160,7 @@ const UserLogin = () => {
 					</Button>
 				</form>
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 

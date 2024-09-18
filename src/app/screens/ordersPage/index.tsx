@@ -43,6 +43,7 @@ import { NavLink } from "react-router-dom";
 import UserService from "../../services/UserService";
 import { UserPaymentInput } from "../../../lib/types/user";
 import { retrieveUserPayment } from "./selector";
+import { motion } from "framer-motion";
 
 // REDUX SLICE & SELECTOR:
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -150,7 +151,7 @@ const OrdersPage = () => {
 		authUser?.userImage && `${serverApi}/${authUser?.userImage}`;
 
 	const userType =
-		authUser?.userType === UserType.SHOP_OWNER
+		authUser?.userType === UserType.STORE_OWNER
 			? "owner"
 			: UserType.USER
 			? "user"
@@ -229,7 +230,13 @@ const OrdersPage = () => {
 	};
 
 	return (
-		<div className="order-page bg-gray-100 min-h-screen p-4">
+		<motion.div
+			initial={{ scale: 0.8 }}
+			animate={{ scale: 1 }}
+			exit={{ scale: 0.8 }}
+			transition={{ duration: 0.3 }}
+			className="order-page bg-gray-100 min-h-screen p-4"
+		>
 			<Container className="order-container mx-auto">
 				<Stack direction={{ xs: "column", md: "row" }} spacing={2}>
 					<Stack className="order-left flex-1 bg-white rounded-lg shadow-lg p-4">
@@ -413,7 +420,7 @@ const OrdersPage = () => {
 					</Stack>
 				</Stack>
 			</Container>
-		</div>
+		</motion.div>
 	);
 };
 

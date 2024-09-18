@@ -21,9 +21,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination } from "swiper";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { motion } from "framer-motion";
 
 interface OrderModalProps {
-	orderData: Product[] | null; // Changed to an array of products
+	orderData: Product[] | null;
 	handleClose: () => void;
 	open: boolean;
 }
@@ -38,7 +39,13 @@ const OrderModal = ({ orderData, open, handleClose }: OrderModalProps) => {
 			aria-labelledby="modal-title"
 			aria-describedby="modal-description"
 		>
-			<div className="bg-white outline-none space-y-5 flex flex-col justify-between p-6 rounded-lg shadow-lg max-w-4xl mx-auto mt-20">
+			<motion.div
+				className="bg-white outline-none space-y-5 flex flex-col justify-between p-6 rounded-lg shadow-lg max-w-4xl mx-auto mt-20"
+				initial={{ scale: 0.8 }} // Start scaled down
+				animate={{ scale: 1 }} // Scale to normal size
+				exit={{ scale: 0.8 }} // Scale down on exit
+				transition={{ duration: 0.3 }}
+			>
 				<div className="flex justify-between items-center">
 					<Typography id="modal-title" variant="h6" component="h2">
 						<span className="font-semibold">Order Details</span>
@@ -126,7 +133,7 @@ const OrderModal = ({ orderData, open, handleClose }: OrderModalProps) => {
 				>
 					Close
 				</Button>
-			</div>
+			</motion.div>
 		</Modal>
 	);
 };

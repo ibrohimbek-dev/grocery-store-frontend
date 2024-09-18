@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Events = () => {
 	const [showAdsPanel, setShowAdsPanel] = useState(true);
@@ -16,8 +16,13 @@ const Events = () => {
 	}, 50000);
 
 	return (
-		<div className="main-container mb-10 mt-2">
-			<AnimatePresence>
+		<motion.div
+			initial={{ scale: 0.8 }}
+			animate={{ scale: 1 }}
+			exit={{ scale: 0.8 }}
+			transition={{ duration: 0.3 }}
+			className="main-container mb-10 mt-2"
+		>			
 				{showAdsPanel && (
 					<motion.div
 						className="bg-yellow-300 overflow-hidden w-full py-2 px-4 flex justify-between items-center"
@@ -105,9 +110,8 @@ const Events = () => {
 							<CloseIcon sx={{ fontSize: 40 }} />
 						</div>
 					</motion.div>
-				)}
-			</AnimatePresence>
-		</div>
+				)}			
+		</motion.div>
 	);
 };
 

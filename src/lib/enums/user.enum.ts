@@ -1,6 +1,6 @@
 export enum UserType {
 	USER = "USER",
-	SHOP_OWNER = "SHOP_OWNER",
+	STORE_OWNER = "STORE_OWNER",
 }
 
 export enum UserStatus {

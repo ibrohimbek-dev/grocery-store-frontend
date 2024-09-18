@@ -8,6 +8,7 @@ import { CartItem } from "../../../lib/types/search";
 import { NavLink } from "react-router-dom";
 import { GoArrowUpRight } from "react-icons/go";
 import { useGlobals } from "../../hooks/useGlobal";
+import { motion } from "framer-motion";
 
 interface ContainerProps {
 	productData: Product[];
@@ -27,24 +28,30 @@ const Container = ({
 	cartItems,
 }: ContainerProps) => {
 	const [modalOpen, setModalOpen] = useState<boolean>(false);
-	const [isProductId, setProductId] = useState<string>("");
+	const [isProductId, setIsProductId] = useState<string>("");
 	const { setUpdateNum } = useGlobals();
 
 	const handleClose = () => {
 		setModalOpen(false);
-    setProductId("");
-    setUpdateNum(0)
+		setIsProductId("");
+		setUpdateNum(0);
 	};
 
 	const setModalOpenData = (productId: string) => {
-		setProductId(productId);
+		setIsProductId(productId);
 		setModalOpen(true);
 		setUpdateNum(1);
 	};
 
 	return (
 		<>
-			<div className="w-full border-4">
+			<motion.div
+				className="w-full"
+				initial={{ scale: 0.8 }}
+				animate={{ scale: 1 }}
+				exit={{ scale: 0.8 }}
+				transition={{ duration: 0.3 }}				
+			>
 				<div className="text-4xl font-bold mb-4">{sectionName}</div>
 				<div className="grid p-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
 					{productData?.length > 0 ? (
@@ -117,12 +124,12 @@ const Container = ({
 						</div>
 					</div>
 				)}
-			</div>
+			</motion.div>
 
 			<>
 				<ModalProduct
 					productId={isProductId}
-					sectionName="Electronics"
+					sectionName={sectionName}
 					open={modalOpen}
 					handleClose={handleClose}
 					onAdd={onAdd}
@@ -133,6 +140,5 @@ const Container = ({
 		</>
 	);
 };
-
 
 export default Container;

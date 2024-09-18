@@ -10,6 +10,7 @@ import { Messages } from "../../../lib/config";
 import { NavLink } from "react-router-dom";
 import UserService from "../../services/UserService";
 import { useGlobals } from "../../hooks/useGlobal";
+import { motion } from "framer-motion";
 
 const UserSignup: React.FC = () => {
 	const location = useLocation();
@@ -108,7 +109,13 @@ const UserSignup: React.FC = () => {
 	};
 
 	return (
-		<div className="w-full h-screen overflow-hidden flex justify-center">
+		<motion.div
+			initial={{ scale: 0.8 }}
+			animate={{ scale: 1 }}
+			exit={{ scale: 0.8 }}
+			transition={{ duration: 0.3 }}
+			className="w-full h-screen overflow-hidden flex justify-center"
+		>
 			{imgLoad ? (
 				<img
 					alt="background"
@@ -259,7 +266,7 @@ const UserSignup: React.FC = () => {
 					</div>
 				</div>
 			</form>
-		</div>
+		</motion.div>
 	);
 };
 

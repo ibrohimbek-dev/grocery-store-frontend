@@ -1,6 +1,5 @@
 import React, { MouseEvent, useEffect, useState } from "react";
 import { Badge, IconButton, Menu, Button } from "@mui/material";
-// import { useGlobals } from "app/hooks/useGlobal";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -13,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import OrderService from "../../services/OrderService";
 import { useGlobals } from "../../hooks/useGlobal";
 import { sweetPopupErrorHandling } from "../../../lib/sweetAlert";
+import { motion } from "framer-motion";
 
 const Basket = (props: BasketProps) => {
 	const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
@@ -68,7 +68,13 @@ const Basket = (props: BasketProps) => {
 	}, [cartItems]);
 
 	return (
-		<div className="">
+		<motion.div
+			initial={{ scale: 0.8 }}
+			animate={{ scale: 1 }}
+			exit={{ scale: 0.8 }}
+			transition={{ duration: 0.3 }}
+			className=""
+		>
 			<IconButton
 				aria-label="cart"
 				id="basic-button"
@@ -209,7 +215,7 @@ const Basket = (props: BasketProps) => {
 					)}
 				</div>
 			</Menu>
-		</div>
+		</motion.div>
 	);
 };
 

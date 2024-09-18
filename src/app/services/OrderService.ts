@@ -45,24 +45,19 @@ class OrderService {
 
 			const result = await axios.get(url + query, { withCredentials: true });
 
-			console.log("result on getMyOrders =>", result);
 			return result.data;
-		} catch (error) {
-			console.log("Error on getMyOrders =>", error);
+		} catch (error) {			
 			throw error;
 		}
 	}
 
 	public async updateOrderStatus(input: OrderUpdateInput): Promise<Order> {
 		try {
-			const url = `${this.path}/user/order/update/status`;
-			console.log("updateOrderStatus input =>", input);
-			const result = await axios.post(url, input, { withCredentials: true });
-			console.log("result on updateOrderStatus =>", result);
+			const url = `${this.path}/user/order/update/status`;			
+			const result = await axios.post(url, input, { withCredentials: true });			
 
 			return result.data;
-		} catch (error) {
-			console.log("Error on updateOrderStatus =>", error);
+		} catch (error) {			
 			throw error;
 		}
 	}

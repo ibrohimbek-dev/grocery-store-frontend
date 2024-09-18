@@ -5,35 +5,35 @@ const selectHomePage = (state: AppRootState) => state.homePage;
 
 export const retrieveFreshProduce = createSelector(
 	selectHomePage,
-	(homePage: HomePageState) => homePage.freshProduceSection
+	(HomePage: HomePageState) => HomePage.freshProduceSection
 );
 
 export const retrieveDairyProducts = createSelector(
 	selectHomePage,
-	(homePage: HomePageState) => homePage.dairyProductsSection
+	(HomePage: HomePageState) => HomePage.diaryProductsSection
 );
 
 export const retrieveMeatPoultry = createSelector(
 	selectHomePage,
-	(homePage: HomePageState) => homePage.meatPoultrySection
+	(HomePage: HomePageState) => HomePage.meatPoultrySection
 );
 
 export const retrieveBakeryItems = createSelector(
 	selectHomePage,
-	(homePage: HomePageState) => homePage.bakeryItemsSection
+	(HomePage: HomePageState) => HomePage.bakeryItemsSection
 );
 
-export const retrieveCannedGoods = createSelector(
+export const retrieveCannedFoods = createSelector(
 	selectHomePage,
-	(homePage: HomePageState) => homePage.cannedGoodsSection
+	(HomePage: HomePageState) => HomePage.cannedGoodsSection
 );
 
 export const retrieveBeverages = createSelector(
 	selectHomePage,
-	(homePage: HomePageState) => homePage.baveragesSection
+	(HomePage: HomePageState) => HomePage.baveragesSection
 );
 
 export const retrieveTopUsers = createSelector(
 	selectHomePage,
-	(homePage: HomePageState) => homePage.topUsers
+	(HomePage: HomePageState) => HomePage.topUsers
 );

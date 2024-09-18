@@ -11,7 +11,7 @@ import {
 	setFreshProduce,
 	setMeatPoultry,
 	setCannedFoods,
-	setDairyProducts,
+	setDiaryProducts,
 	setTopUsers,
 	setBeverages,
 	setBakeryItems,
@@ -20,11 +20,17 @@ import TopUsers from "./TopUsers";
 import { CardActionsProps } from "../../../lib/types/common";
 import { useGlobals } from "../../hooks/useGlobal";
 import FreshProduce from "./FreshProduce";
+import DairyProducts from "./DairyProducts";
+import MeatPoultry from "./MeatPoultry";
+import BakeryItems from "./BakeryItems";
+import CannedFoods from "./CannedFoods";
+import Beverages from "./Beverages";
+import { motion } from "framer-motion";
 
 // REDUX SLICE:
 const actionDispatch = (dispatch: Dispatch) => ({
 	setFreshProduce: (data: Product[]) => dispatch(setFreshProduce(data)),
-	setDairyProducts: (data: Product[]) => dispatch(setDairyProducts(data)),
+	setDiaryProducts: (data: Product[]) => dispatch(setDiaryProducts(data)),
 	setMeatPoultry: (data: Product[]) => dispatch(setMeatPoultry(data)),
 	setBakeryItems: (data: Product[]) => dispatch(setBakeryItems(data)),
 	setCannedFoods: (data: Product[]) => dispatch(setCannedFoods(data)),
@@ -35,7 +41,7 @@ const actionDispatch = (dispatch: Dispatch) => ({
 const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 	const {
 		setFreshProduce,
-		setDairyProducts,
+		setDiaryProducts,
 		setMeatPoultry,
 		setBakeryItems,
 		setCannedFoods,
@@ -49,8 +55,6 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 		const productService = new ProductService();
 		const userService = new UserService();
 		setOrderBuilder(new Date());
-
-		// TODO: page & limit ustida ishlashim kerak
 
 		productService
 			.getProductsBySort({
@@ -69,8 +73,8 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 				order: "productViews",
 				productCollection: ProductCollection.DAIRY_PRODUCTS,
 			})
-			.then((data) => setDairyProducts(data))
-			.catch((err) => console.log("Error on data setDairyProducts =>", err));
+			.then((data) => setDiaryProducts(data))
+			.catch((err) => console.log("Error on data setDiaryProducts =>", err));
 
 		productService
 			.getProductsBySort({
@@ -122,17 +126,50 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 	}, [updateNum]);
 
 	return (
-		<div className="border-4 border-yellow-400 overflow-hidden w-full flex flex-row justify-center items-center">
-			<div className="flex flex-col w-full items-center space-y-10 mt-4">			
+		<motion.div
+			initial={{ scale: 0.8 }}
+			animate={{ scale: 1 }}
+			exit={{ scale: 0.8 }}
+			transition={{ duration: 0.3 }}
+			className="border-4 border-yellow-400 overflow-hidden w-full flex flex-row justify-center items-center"
+		>
+			<div className="flex flex-col w-full items-center space-y-10 mt-4">
 				<HeroSlider />
-				<FreshProduce
-					cartItems={cartItems}
-					onAdd={onAdd}
-					onDeleteAll={onDeleteAll}
-				/>
+				<>
+					<FreshProduce
+						cartItems={cartItems}
+						onAdd={onAdd}
+						onDeleteAll={onDeleteAll}
+					/>
+					<DairyProducts
+						cartItems={cartItems}
+						onAdd={onAdd}
+						onDeleteAll={onDeleteAll}
+					/>
+					<MeatPoultry
+						cartItems={cartItems}
+						onAdd={onAdd}
+						onDeleteAll={onDeleteAll}
+					/>
+					<BakeryItems
+						cartItems={cartItems}
+						onAdd={onAdd}
+						onDeleteAll={onDeleteAll}
+					/>
+					<CannedFoods
+						cartItems={cartItems}
+						onAdd={onAdd}
+						onDeleteAll={onDeleteAll}
+					/>
+					<Beverages
+						cartItems={cartItems}
+						onAdd={onAdd}
+						onDeleteAll={onDeleteAll}
+					/>
+				</>
 				<TopUsers />
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 

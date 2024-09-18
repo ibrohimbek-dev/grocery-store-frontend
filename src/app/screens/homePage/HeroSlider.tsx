@@ -2,6 +2,7 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay, Pagination } from "swiper";
 import { FreeMode, Navigation, Thumbs } from "swiper";
+import { motion } from "framer-motion";
 
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -23,7 +24,13 @@ const HeroSlider = () => {
 	SwiperCore.use([FreeMode, Navigation, Thumbs, Autoplay, Pagination]);
 
 	return (
-		<div className="w-screen mb-10 product-img-carousel flex items-center justify-center flex-col space-y-4 overflow-hidden rounded-md">
+		<motion.div
+			initial={{ scale: 0.8 }}
+			animate={{ scale: 1 }}
+			exit={{ scale: 0.8 }}
+			transition={{ duration: 0.3 }}
+			className="w-screen mb-10 product-img-carousel flex items-center justify-center flex-col space-y-4 overflow-hidden rounded-md"
+		>
 			<div className="w-full overflow-hidden space-y-4 h-full flex flex-col justify-center items-center">
 				<Swiper
 					className="h-auto w-full rounded-md overflow-hidden swiper-area"
@@ -56,7 +63,7 @@ const HeroSlider = () => {
 						))}
 				</Swiper>
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 

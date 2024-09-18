@@ -21,6 +21,7 @@ import OrderModal from "./OrderModal";
 import { useGlobals } from "../../hooks/useGlobal";
 import OrderService from "../../services/OrderService";
 import { Button } from "@mui/material";
+import { motion } from "framer-motion";
 
 // REDUX SLICE & SELECTOR:
 const finishedOrdersRetriever = createSelector(
@@ -76,7 +77,13 @@ const FinishedOrders = () => {
 	return (
 		<>
 			<TabPanel value="3">
-				<div className="space-y-4">
+				<motion.div
+					initial={{ scale: 0.8 }}
+					animate={{ scale: 1 }}
+					exit={{ scale: 0.8 }}
+					transition={{ duration: 0.3 }}
+					className="space-y-4"
+				>
 					{finishedOrders?.length > 0 ? (
 						finishedOrders?.map((order: Order) => (
 							<div
@@ -173,7 +180,7 @@ const FinishedOrders = () => {
 							</div>
 						</div>
 					)}
-				</div>
+				</motion.div>
 			</TabPanel>
 
 			<>

@@ -1,25 +1,27 @@
-import { HomePageState } from "../../../lib/types/screen";
+import { ProductsPageState } from "../../../lib/types/screen";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: HomePageState = {
+const initialState: ProductsPageState = {
 	freshProduceSection: [],
-	dairyProductsSection: [],
+	diaryProductsSection: [],
 	meatPoultrySection: [],
 	bakeryItemsSection: [],
 	cannedGoodsSection: [],
 	baveragesSection: [],
-	topUsers: [],
+	discounts: [],
+	recommends: [],
+	ads: [],	
 };
 
-const homePageSlice = createSlice({
-	name: "homePage",
+const productPageSlice = createSlice({
+	name: "productPage",
 	initialState,
 	reducers: {
 		setFreshProduce: (state, action) => {
 			state.freshProduceSection = action.payload;
 		},
-		setDairyProducts: (state, action) => {
-			state.dairyProductsSection = action.payload;
+		setDiaryProducts: (state, action) => {
+			state.diaryProductsSection = action.payload;
 		},
 		setMeatPoultry: (state, action) => {
 			state.meatPoultrySection = action.payload;
@@ -33,22 +35,29 @@ const homePageSlice = createSlice({
 		setBeverages: (state, action) => {
 			state.baveragesSection = action.payload;
 		},
-		setTopUsers: (state, action) => {
-			state.topUsers = action.payload;
+		setDiscounts: (state, action) => {
+			state.discounts = action.payload;
 		},
+		setRecommends: (state, action) => {
+			state.recommends = action.payload;
+		},
+		setAds: (state, action) => {
+			state.ads = action.payload;
+		}
 	},
 });
 
 export const {
 	setFreshProduce,
-	setDairyProducts,
+	setDiaryProducts,
 	setMeatPoultry,
 	setBakeryItems,
 	setCannedFoods,
 	setBeverages,
-	setTopUsers,
-} = homePageSlice.actions;
+	setDiscounts,
+	setRecommends,
+	setAds,
+} = productPageSlice.actions;
 
-const HomePageReducer = homePageSlice.reducer;
-
-export default HomePageReducer;
+const ProductPageReducer = productPageSlice.reducer;
+export default ProductPageReducer;

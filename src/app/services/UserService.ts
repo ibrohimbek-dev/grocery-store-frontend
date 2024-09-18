@@ -1,6 +1,7 @@
 import {
 	LoginInput,
 	User,
+	UserInquiry,
 	UserPaymentInput,
 	UserUpdateInput,
 } from "../../lib/types/user";
@@ -21,6 +22,32 @@ class UserService {
 			return result.data;
 		} catch (error) {
 			console.log("Error on getTopUsers =>", error);
+			throw error;
+		}
+	}
+
+	public async getAllUsersBySort(input: UserInquiry): Promise<User[]> {
+		try {
+			let url = `${this.path}/user/users/all?order=${input.order}&page=${input.page}&limit=${input.limit}`;
+
+			if (input.search) {
+				url += `&search=${input.search}`;
+			}
+
+			const result = await axios.get(url);
+			return result.data;
+		} catch (error) {
+			throw error;
+		}
+	}
+
+	public async increaseUserView(userId: string): Promise<User> {
+		try {
+			const url = `${this.path}/user/users/${userId}`;
+			const result = await axios.get(url, { withCredentials: true });
+			return result.data;
+		} catch (error) {
+			console.log("Error on increaseUserView =>", error);
 			throw error;
 		}
 	}
@@ -82,13 +109,13 @@ class UserService {
 		}
 	}
 
-	public async updateMember(input: UserUpdateInput): Promise<User> {
+	public async updateUser(input: UserUpdateInput): Promise<User> {
 		try {
 			const formData = new FormData();
 			formData.append("userNick", input.userNick || "");
 			formData.append("userPhone", input.userPhone || "");
 			formData.append("userAddress", input.userAddress || "");
-			formData.append("userDesc", input.userNick || "");
+			formData.append("userDesc", input.userDesc || "");
 			formData.append("userImage", input.userImage || "");
 
 			const result = await axios(`${this.path}/user/update`, {

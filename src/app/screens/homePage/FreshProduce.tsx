@@ -14,12 +14,12 @@ const freshProduceRetriever = createSelector(
 const FreshProduce = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 		const { freshProduceSection } = useSelector(freshProduceRetriever);
 
-		console.log("freshProduceSection =>", freshProduceSection);
+		
 
 		return (
 			<Container
-				moreLink="/store/fresh-produce"
-				sectionName={"Fresh Produce Section section"}
+				moreLink="/store/products/fresh-produce"
+				sectionName={"Fresh Produce Section"}
 				productData={freshProduceSection}
 				cartItems={cartItems}
 				onAdd={onAdd}

@@ -22,6 +22,7 @@ import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { Product } from "../../../lib/types/product";
 import ProductService from "../../services/ProductService";
 import OrderModal from "./OrderModal";
+import { motion } from "framer-motion";
 
 // REDUX SLICE & SELECTOR
 const processOrderRetriever = createSelector(
@@ -87,7 +88,13 @@ const ProcessOrders = ({ setValue }: ProcessOrderProps) => {
 	return (
 		<>
 			<TabPanel value="2">
-				<div className="space-y-4">
+				<motion.div
+					initial={{ scale: 0.8 }}
+					animate={{ scale: 1 }}
+					exit={{ scale: 0.8 }}
+					transition={{ duration: 0.3 }}
+					className="space-y-4"
+				>
 					{processOrders?.length > 0 ? (
 						processOrders.map((order) => (
 							<div
@@ -184,7 +191,7 @@ const ProcessOrders = ({ setValue }: ProcessOrderProps) => {
 							</div>
 						</div>
 					)}
-				</div>
+				</motion.div>
 			</TabPanel>
 
 			<>

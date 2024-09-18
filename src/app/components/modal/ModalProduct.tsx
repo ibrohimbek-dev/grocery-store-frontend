@@ -20,13 +20,15 @@ import SwiperCore, { Pagination } from "swiper";
 import { FreeMode, Navigation, Thumbs } from "swiper";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
+import { serverApi } from "../../../lib/config";
+import CardActions from "../actions/CardActions";
+import { CartItem } from "../../../lib/types/search";
+import { motion } from "framer-motion";
+
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-import { serverApi } from "../../../lib/config";
-import CardActions from "../actions/CardActions";
-import { CartItem } from "../../../lib/types/search";
 
 interface ModalProps {
 	productId: string;
@@ -59,14 +61,14 @@ const ModalProduct = ({
 }: ModalProps) => {
 	const { setModalProduct } = actionDispatch(useDispatch());
 	const { modalProduct } = useSelector(modalProductRetriever);
-	const [images, setImages] = useState<string[] | null>(null);	
+	const [images, setImages] = useState<string[] | null>(null);
 
 	useEffect(() => {
-		const productService = new ProductService();		
+		const productService = new ProductService();
 
 		if (productId?.length > 0) {
 			productService
-				.increaseView(productId)
+				.increaseProductView(productId)
 				.then((data) => setModalProduct(data))
 				.catch((err) => console.log("Error on modalProduct =>", err));
 		}
@@ -88,7 +90,14 @@ const ModalProduct = ({
 			aria-labelledby="modal-title"
 			aria-describedby="modal-description"
 		>
-			<div className="bg-white outline-none space-y-5 flex flex-col justify-between p-6 rounded-lg shadow-lg max-w-4xl mx-auto mt-20">
+			<motion.div
+				className="bg-white outline-none space-y-5 flex flex-col justify-between p-6 rounded-lg shadow-lg max-w-4xl mx-auto mt-20"
+				initial={{ scale: 0.8 }}
+				animate={{ scale: 1 }}
+				exit={{ scale: 0.8 }}
+				transition={{ duration: 0.3 }}
+				layout
+			>
 				<div className="flex justify-between items-center">
 					<Typography id="modal-title" variant="h6" component="h2">
 						{sectionName} - Product Details
@@ -187,7 +196,7 @@ const ModalProduct = ({
 					onAdd={onAdd}
 					productData={modalProduct}
 				/>
-			</div>
+			</motion.div>
 		</Modal>
 	);
 };

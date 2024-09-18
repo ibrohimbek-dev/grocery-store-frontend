@@ -9,6 +9,7 @@ import Basket from "./Basket";
 import {
 	sweetErrorHandling,
 	sweetTopSmallErrorAlert,
+	sweetTopSmallInfoAlert,
 	sweetTopSmallSuccessAlert,
 } from "../../../lib/sweetAlert";
 import { useGlobals } from "../../hooks/useGlobal";
@@ -16,6 +17,7 @@ import { BasketProps, T } from "../../../lib/types/common";
 import { Messages } from "../../../lib/config";
 import UserService from "../../services/UserService";
 import OrderService from "../../services/OrderService";
+import { motion } from "framer-motion";
 
 const Navbar = (props: BasketProps) => {
 	const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
@@ -73,7 +75,12 @@ const Navbar = (props: BasketProps) => {
 	};
 
 	const handleClickThemeMode = () => {
-		setDarkMode(!darkMode);
+		// TODO: Night mode is always false
+		sweetTopSmallInfoAlert(
+			"Night and Dark mode disabled by developers!",
+			5000
+		).then();
+		setDarkMode(false);
 		setAnchorEl(null);
 		setOpen(false);
 	};
@@ -102,7 +109,7 @@ const Navbar = (props: BasketProps) => {
 	};
 
 	return (
-		<div className="main-container flex flex-col">
+		<motion.div className="main-container flex flex-col">
 			<div className="flex justify-between">
 				<div className="flex justify-center items-center">
 					<NavLink
@@ -135,7 +142,11 @@ const Navbar = (props: BasketProps) => {
 							authUser ? "border rounded-md bg-[#8d99ae] p-1 text-sm" : "hidden"
 						}
 					>
-						Welcome!
+						Welcome{" "}
+						{authUser && authUser?.userNick?.length > 7
+							? authUser?.userNick?.slice(0, 7) + "..."
+							: authUser?.userNick}
+						!
 					</div>
 					<NavLink
 						className={`border rounded-md bg-[#8d99ae] p-1 text-sm`}
@@ -204,7 +215,7 @@ const Navbar = (props: BasketProps) => {
 								<MenuItem onClick={handleClose}>
 									<NavLink
 										className={"hover:text-black hover:font-semibold w-full"}
-										to={"/my/profile"}
+										to={"/store/user-settings"}
 									>
 										Profile
 									</NavLink>
@@ -252,6 +263,14 @@ const Navbar = (props: BasketProps) => {
 										{darkMode ? "Light mode" : "Night mode"}
 									</span>
 								</MenuItem>
+								<MenuItem onClick={handleClose}>
+									<NavLink
+										className={"hover:text-black hover:font-semibold w-full"}
+										to={"/store/help-page"}
+									>
+										Help Page
+									</NavLink>
+								</MenuItem>
 							</Menu>
 						</div>
 
@@ -272,73 +291,67 @@ const Navbar = (props: BasketProps) => {
 				<div className="space-x-4">
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/store/example"}
+						to={"/store/products/recommends"}
 					>
-						#example
+						#recommends
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/store/text_tiles"}
+						to={"/store/products/discounts"}
 					>
-						#text-tiles
+						#discounts
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/store/home_living"}
+						to={"/store/products/ads"}
 					>
-						#home_living
+						#ads
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/store/beauty_skin"}
+						to={"/store/products/fresh-produce"}
 					>
-						#beauty_skin
+						#fresh-produce
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/store/sports"}
+						to={"/store/products/dairy-products"}
 					>
-						#sports
+						#dairy-products
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/store/toys"}
+						to={"/store/products/meat-poultry"}
 					>
-						#toys
+						#meat-poultry
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/store/books"}
+						to={"/store/products/bakery-items"}
 					>
-						#books
+						#bakery-items
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/store/grocery"}
+						to={"/store/products/canned-foods"}
 					>
-						#grocery
+						#canned-foods
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/store/automotive"}
+						to={"/store/products/beverages"}
 					>
-						#automotive
+						#beverages
 					</NavLink>
 					<NavLink
 						className={"italic  font-sans hover:text-blue-700"}
-						to={"/store/health"}
+						to={"/store/users/active-users"}
 					>
-						#health
-					</NavLink>
-					<NavLink
-						className={"italic  font-sans hover:text-blue-700"}
-						to={"/store/others"}
-					>
-						#others
+						#active-users
 					</NavLink>
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 };
 

@@ -10,7 +10,9 @@ export interface User {
 	userAddress?: string;
 	userImage?: string;
 	userDesc?: string;
-	userPoints?: number;
+	userPoints: number;
+	userViews: number;
+	userLikes: number;
 	createdAt: Date;
 	updatedAt: Date;
 }
@@ -25,6 +27,14 @@ export interface UserInput {
 	userDesc?: string;
 	userImage?: string;
 	userPoints?: number;
+}
+
+
+export interface UserInquiry {
+	order: string;
+	page: number;
+	limit: number;
+	search?: string;
 }
 
 export interface UserPaymentInput {

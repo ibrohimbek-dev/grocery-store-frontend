@@ -12,6 +12,7 @@ import { useGlobals } from "../../hooks/useGlobal";
 import { Messages } from "../../../lib/config";
 import { sweetTopSmallErrorAlert } from "../../../lib/sweetAlert";
 import OrderService from "../../services/OrderService";
+import { motion } from "framer-motion";
 
 interface CardActionsProps {
 	productData?: Product | null;
@@ -105,7 +106,13 @@ const CardActions = ({
 
 	return (
 		<>
-			<div className="flex space-x-4 justify-between items-center py-2 px-1">
+			<motion.div
+				initial={{ scale: 0.8 }}
+				animate={{ scale: 1 }}
+				exit={{ scale: 0.8 }}
+				transition={{ duration: 0.3 }}
+				className="flex space-x-4 justify-between items-center py-2 px-1"
+			>
 				<Tooltip title={authUser ? "Order this item" : "Please login first!"}>
 					<Button
 						variant="contained"
@@ -155,7 +162,7 @@ const CardActions = ({
 						</Badge>
 					</Button>
 				</Tooltip>
-			</div>
+			</motion.div>
 
 			<Snackbar
 				open={openAlert}
@@ -171,4 +178,4 @@ const CardActions = ({
 export default CardActions;
 
 // DONE!
-// TODO: Bu qisimda "Order" bosilganda, bosilan order'ni pausedOrders'ga olib o'tishim kerak
+// TODO: Bu qismida like'lar bilan ishlashim kerak

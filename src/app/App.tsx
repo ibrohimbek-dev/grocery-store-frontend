@@ -8,13 +8,19 @@ import { useGlobals } from "./hooks/useGlobal";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { themeMode } from "./theme/theme";
-import HomePage from "./screens/home";
-import OrdersPage from "./screens/orders";
+import HomePage from "./screens/homePage";
+import OrdersPage from "./screens/ordersPage";
 import AuthenticationModal from "./components/auth";
+
+import UserPage from "./screens/usersPage";
+import ProductsPage from "./screens/productsPage";
+import { AnimatePresence } from "framer-motion";
+import ActiveUsers from "./screens/usersPage/ActiveUsers";
 
 import "../css/main.css";
 import "../css/app.css";
-import UserPage from "./screens/user";
+import HelpPage from "./screens/helpPage";
+
 const App = () => {
 	const { darkMode } = useGlobals();
 	const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = useBasket();
@@ -62,45 +68,65 @@ const App = () => {
 	return (
 		<ThemeProvider theme={darkTheme}>
 			<CssBaseline />
-			<div
-				ref={containerRef}
-				className="border-4 h-full overflow-x-hidden  border-red-500 flex flex-col justify-between items-center"
-			>
-				<div className={isRegister ? "hidden" : "flex flex-col"}>
-          <div className="">            
-						<Events />
-					</div>
-					<Navbar
-						cartItems={cartItems}
-						onAdd={onAdd}
-						onRemove={onRemove}
-						onDelete={onDelete}
-						onDeleteAll={onDeleteAll}
-					/>
-				</div>
-
-				<div className="border-4 border-green-500 main-container">
-					<Routes>
-						<Route
-							path="/"
-							element={
-								<HomePage
-									cartItems={cartItems}
-									onAdd={onAdd}
-									onDeleteAll={onDeleteAll}
-								/>
-							}
+			<AnimatePresence>
+				<div
+					ref={containerRef}
+					className="border-4 h-full overflow-x-hidden  border-red-500 flex flex-col justify-between items-center"
+				>
+					<div className={isRegister ? "hidden" : "flex flex-col"}>
+						<div className="">
+							<Events />
+						</div>
+						<Navbar
+							cartItems={cartItems}
+							onAdd={onAdd}
+							onRemove={onRemove}
+							onDelete={onDelete}
+							onDeleteAll={onDeleteAll}
 						/>
-						<Route path="*" element={<Navigate to={"/"} replace />} />
-						<Route path="/store/orders" element={<OrdersPage />} />
-						<Route path="/store/orders/history" element={<OrdersPage />} />
-						<Route path="/store/process/*" element={<AuthenticationModal />} />
-						<Route path="/store/user-settings" element={<UserPage />} />						
-					</Routes>
-				</div>
+					</div>
 
-				<Footer />
-			</div>
+					<div className="border-4 border-green-500 main-container">
+						<Routes>
+							<Route
+								path="/"
+								element={
+									<HomePage
+										cartItems={cartItems}
+										onAdd={onAdd}
+										onDeleteAll={onDeleteAll}
+									/>
+								}
+							/>
+							<Route path="*" element={<Navigate to={"/"} replace />} />
+							<Route path="/store/orders" element={<OrdersPage />} />
+							<Route
+								path="/store/users/active-users"
+								element={<ActiveUsers />}
+							/>
+							<Route path="/store/orders/history" element={<OrdersPage />} />
+							<Route
+								path="/store/process/*"
+								element={<AuthenticationModal />}
+							/>
+							<Route path="/store/user-settings" element={<UserPage />} />
+							<Route path="/store/help-page" element={<HelpPage />} />
+							<Route
+								path="/store/products/*"
+								element={
+									<ProductsPage
+										cartItems={cartItems}
+										onAdd={onAdd}
+										onDeleteAll={onDeleteAll}
+									/>
+								}
+							/>
+						</Routes>
+					</div>
+
+					<Footer />
+				</div>
+			</AnimatePresence>
 		</ThemeProvider>
 	);
 };
