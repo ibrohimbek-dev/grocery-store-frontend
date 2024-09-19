@@ -75,7 +75,7 @@ const App = () => {
 			<AnimatePresence>
 				<div
 					ref={containerRef}
-					className="h-full overflow-x-hidden flex flex-col justify-between items-center"
+					className="h-full w-full overflow-x-hidden flex flex-col justify-between items-center"
 				>
 					<div
 						className={

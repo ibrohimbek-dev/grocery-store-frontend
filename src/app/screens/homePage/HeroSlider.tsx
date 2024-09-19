@@ -35,10 +35,10 @@ const HeroSlider = () => {
 					className="h-auto w-full rounded-md overflow-hidden swiper-area"
 					loop={true}
 					spaceBetween={10}
+					initialSlide={0}
+					centeredSlides={false}
 					navigation={true}
 					modules={[FreeMode, Navigation, Thumbs, Autoplay]}
-					centeredSlides={false}
-					initialSlide={0}
 					// autoplay={{
 					// 	delay: 5000, // Delay between slides in milliseconds
 					// 	disableOnInteraction: false, // Don't disable autoplay when user interacts

@@ -10,7 +10,7 @@ import { T } from "../../../lib/types/common";
 import { useNavigate } from "react-router-dom";
 import { useGlobals } from "../../hooks/useGlobal";
 import { Messages } from "../../../lib/config";
-import { sweetTopSmallErrorAlert } from "../../../lib/sweetAlert";
+import { sweetTopSmallErrorAlert, sweetTopSmallInfoAlert } from "../../../lib/sweetAlert";
 import OrderService from "../../services/OrderService";
 import { motion } from "framer-motion";
 
@@ -101,7 +101,8 @@ const CardActions = ({
 	};
 
 	const handleLikeBtn = (productId: string) => {
-		console.log("like productId =>", productId);
+    console.log("like productId =>", productId);
+    sweetTopSmallInfoAlert(Messages.COMING_SOON).then();
 	};
 
 	return (

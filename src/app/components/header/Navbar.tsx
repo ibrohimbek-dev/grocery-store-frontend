@@ -72,7 +72,8 @@ const Navbar = (props: BasketProps) => {
 	};
 
 	const handleClickOnChange = (e: T) => {
-		// console.log(e)
+    // console.log(e)
+    // TODO: Shu qismiga keldim. Shu qismida umumiy search qismini qilishim kerak
 	};
 
 	const handleOnKeyDown = (e: T) => {

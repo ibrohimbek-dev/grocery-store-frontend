@@ -6,12 +6,11 @@ import { User } from "../../../lib/types/user";
 import { serverApi } from "../../../lib/config";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Pagination } from "swiper";
-import { FaAngleDoubleRight, FaAngleDoubleLeft } from "react-icons/fa";
+import SwiperCore from "swiper";
 
 import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import { GoArrowUpRight } from "react-icons/go";
+import { NavLink } from "react-router-dom";
 
 const topUsersRetriever = createSelector(
 	retrieveTopUsers,
@@ -21,23 +20,17 @@ const topUsersRetriever = createSelector(
 const ActiveUsers = () => {
 	const { topUsersSection } = useSelector(topUsersRetriever);
 
-	SwiperCore.use([Navigation, Pagination]);
+	SwiperCore.use([]);
 
 	return (
-		<div className="p-4 top-user-section bg-white h-auto overflow-hidden w-full shadow-md">
-			<div className="text-lg font-semibold mb-4">Active Users</div>
+		<div className="p-4 bg-white h-auto overflow-hidden w-full shadow-md">
+			<div className="text-lg font-semibold mb-4">Top Users</div>
 			<Swiper
 				className="cards-frame"
-				slidesPerView={4} // Display max 4 users
-				slidesPerGroup={1} // Slide one user at a time
+				slidesPerView={4}
 				spaceBetween={30}
-				navigation={{
-					nextEl: ".user-swiper-button-next",
-					prevEl: ".user-swiper-button-prev",
-				}}
-				pagination={{
-					clickable: true,
-				}}
+				centeredSlides={false}
+				slidesPerGroup={1}
 			>
 				{topUsersSection.length > 0 ? (
 					topUsersSection.map((user: User, index) => {
@@ -47,12 +40,12 @@ const ActiveUsers = () => {
 
 						return (
 							<SwiperSlide key={index} className="user-card-frame">
-								<div className="bg-white border rounded-lg overflow-hidden shadow-lg transition-transform duration-200 hover:shadow-xl">
-									<div className="relative aspect-w-1 aspect-h-1">
+								<div className="bg-white border rounded-lg overflow-hidden shadow-xl transition-transform duration-200 hover:shadow-xl">
+									<div className="relative overflow-hidden aspect-w-1 aspect-h-1">
 										<img
 											src={imagePath}
 											alt={user.userNick}
-											className="object-cover w-full h-56 rounded-md"
+											className="object-cover hover:scale-110 transition-all ease-linear duration-200 cursor-pointer w-full h-56 rounded-md"
 										/>
 									</div>
 									<div className="p-4 text-center">
@@ -68,14 +61,21 @@ const ActiveUsers = () => {
 					</div>
 				)}
 			</Swiper>
-			<div className="border-4 flex justify-center space-x-10 items-center mt-4">
-				<FaAngleDoubleLeft className="user-swiper-button-prev hover:scale-110 transition-all ease-linear text-3xl cursor-pointer text-gray-600 hover:text-gray-800" />				
-				<FaAngleDoubleRight className="user-swiper-button-next cursor-pointer hover:scale-110 transition-all ease-linear text-3xl text-gray-600 hover:text-gray-800" />
-			</div>
+			{topUsersSection.length > 0 && (
+				<div className="w-full flex justify-center items-center mt-4">
+					<div className="w-32 rounded-md cursor-pointer mb-2 font-semibold flex justify-center items-center space-x-2 px-4 py-2 bg-blue-300 hover:bg-blue-500 transition-all ease-linear">
+						<NavLink
+							className={"flex items-center justify-center"}
+							to={"/store/users/active-users"}
+						>
+							See More
+							<GoArrowUpRight className="text-2xl" />
+						</NavLink>
+					</div>
+				</div>
+			)}
 		</div>
 	);
 };
 
 export default ActiveUsers;
-
-// TODO:  Shu qismiga keldim

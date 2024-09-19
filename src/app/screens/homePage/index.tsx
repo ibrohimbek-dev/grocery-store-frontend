@@ -29,6 +29,7 @@ import { motion } from "framer-motion";
 import { MdContactPhone } from "react-icons/md";
 import Tooltip from "@mui/material/Tooltip";
 import { NavLink } from "react-router-dom";
+import { FaArrowUp } from "react-icons/fa";
 
 // REDUX SLICE:
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -53,13 +54,20 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 	} = actionDispatch(useDispatch());
 
 	const [isScrolled, setIsScrolled] = useState<boolean>(false);
-	const [hovered, setHovered] = useState<boolean>(false);
 	const { setOrderBuilder, updateNum } = useGlobals();
 
 	const handleScroll = () => {
-		if (window.scrollY > 40) {
+		const scrollTop = window.scrollY;
+		const windowHeight = window.innerHeight;
+		const documentHeight = document.documentElement.scrollHeight;
+
+		if (scrollTop > 40) {
 			setIsScrolled(true);
 		} else {
+			setIsScrolled(false);
+		}
+
+		if (scrollTop + windowHeight >= documentHeight) {
 			setIsScrolled(false);
 		}
 	};
@@ -145,6 +153,14 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [updateNum]);
 
+	const scrollToTop = () => {
+		setIsScrolled(false);
+		window.scrollTo({
+			top: 0,
+			behavior: "smooth",
+		});
+	};
+
 	return (
 		<motion.div
 			initial={{ scale: 0.8 }}
@@ -191,24 +207,24 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 			</div>
 
 			<div className="fixed bottom-10 right-10">
-				<Tooltip
-					title="Contact Us"
-					arrow
-					open={hovered}
-					enterDelay={200}
-					leaveDelay={200}
-				>
+				<Tooltip title="Contact Us" arrow enterDelay={200} leaveDelay={200}>
 					<motion.div
 						initial={{ opacity: 0, scale: 0.8 }}
 						animate={
 							isScrolled ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
 						}
 						transition={{ duration: 0.3 }}
-						onMouseEnter={() => setHovered(true)}
-						onMouseLeave={() => setHovered(false)}
 					>
+						<button
+							onClick={scrollToTop}
+							className={`${
+								isScrolled ? "flex" : "hidden"
+							} items-center justify-center p-2 mt-4 rounded-full bg-gray-800 text-white hover:bg-gray-600 transition`}
+						>
+							<FaArrowUp className="text-xl hover:scale-110 duration-200 transition-all ease-linear cursor-pointer" />
+						</button>
 						<NavLink target="_blank" to={"http://ibrohimbek.link/"}>
-							<MdContactPhone className="text-green-500 text-5xl hover:scale-110 transition-all ease-linear duration-200 hover:rotate-180" />
+							<MdContactPhone className="text-green-500 text-5xl hover:scale-110 transition-all ease-linear duration-200" />
 						</NavLink>
 					</motion.div>
 				</Tooltip>
