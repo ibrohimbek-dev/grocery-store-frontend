@@ -8,6 +8,7 @@ import { ProductStatus } from "../../../lib/enums/product.enum";
 import Container from "./Container";
 import { setAds } from "./slice";
 import { retrieveAds } from "./selector";
+import { useGlobals } from "../../hooks/useGlobal";
 
 // REDUX SLICE & SELECTOR
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -20,7 +21,8 @@ const adsRetriever = createSelector(retrieveAds, (adsSection) => ({
 
 const Ads = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 	const { setAds } = actionDispatch(useDispatch());
-	const { adsSection } = useSelector(adsRetriever);
+  const { adsSection } = useSelector(adsRetriever);
+  const { updateNum } = useGlobals();
 
 	const [productSearch, setProductSearch] = useState<ProductInquiry>({
 		page: 1,
@@ -39,7 +41,7 @@ const Ads = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 			.catch((err) => console.log("Error on Ads.tsx", err));
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [productSearch]);
+	}, [productSearch, updateNum]);
 	return (
 		<Container
 			productData={adsSection}

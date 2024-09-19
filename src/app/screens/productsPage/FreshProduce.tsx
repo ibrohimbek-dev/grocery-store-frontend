@@ -8,6 +8,7 @@ import { retrieveFreshProduce } from "./selector";
 import { ProductCollection } from "../../../lib/enums/product.enum";
 import ProductService from "../../services/ProductService";
 import Container from "./Container";
+import { useGlobals } from "../../hooks/useGlobal";
 
 // REDUX SLICE & SELECTOR
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -21,7 +22,8 @@ const freshProduceRetriever = createSelector(
 
 const FreshProduce = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 	const { setFreshProduce } = actionDispatch(useDispatch());
-	const { freshProduceSection } = useSelector(freshProduceRetriever);
+  const { freshProduceSection } = useSelector(freshProduceRetriever);
+  const { updateNum } = useGlobals();
 
 	const [productSearch, setProductSearch] = useState<ProductInquiry>({
 		page: 1,
@@ -40,7 +42,7 @@ const FreshProduce = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 			.catch((err) => console.log("Error on FreshProduce.tsx" ,err));
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [productSearch]);
+	}, [productSearch, updateNum]);
 
 	return (
 		<Container

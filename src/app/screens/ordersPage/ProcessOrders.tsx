@@ -155,7 +155,12 @@ const ProcessOrders = ({ setValue }: ProcessOrderProps) => {
 											<span>${order.orderDelivery.toFixed(2)}</span>
 										</div>
 										<div className="flex justify-between items-center">
-											<span className="font-semibold">Total:</span>
+											<span className="font-semibold">
+												Total:{" "}
+												<span className="italic font-serif">
+													(without delivery)
+												</span>
+											</span>
 											<span>${order.orderTotal.toFixed(2)}</span>
 										</div>
 									</div>

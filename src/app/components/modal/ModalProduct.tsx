@@ -151,13 +151,11 @@ const ModalProduct = ({
 								{" "}
 								{/* Allow scrolling */}
 								<div>
-									<h3>{modalProduct?.productName}</h3>
+									<div>
+										Product Name: <strong>{modalProduct?.productName}</strong>
+									</div>
 									<p>
 										<strong>Price:</strong> ${modalProduct?.productPrice}
-									</p>
-									<p>
-										<strong>Description:</strong>{" "}
-										{modalProduct?.productDesc || "No description available."}
 									</p>
 									<p>
 										<strong>Status:</strong> {modalProduct?.productStatus}
@@ -174,6 +172,10 @@ const ModalProduct = ({
 									</p>
 									<p>
 										<strong>Likes:</strong> {modalProduct?.productLikes || 0}
+									</p>
+									<p>
+										<strong>Description:</strong>{" "}
+										{modalProduct?.productDesc || "No description available."}
 									</p>
 								</div>
 							</AccordionDetails>

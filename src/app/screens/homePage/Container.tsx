@@ -50,9 +50,10 @@ const Container = ({
 				initial={{ scale: 0.8 }}
 				animate={{ scale: 1 }}
 				exit={{ scale: 0.8 }}
-				transition={{ duration: 0.3 }}				
+				transition={{ duration: 0.3 }}
 			>
 				<div className="text-4xl font-bold mb-4">{sectionName}</div>
+				<div className="border-b-2 border-gray-300 mb-4"></div>
 				<div className="grid p-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
 					{productData?.length > 0 ? (
 						productData.map((product) => {

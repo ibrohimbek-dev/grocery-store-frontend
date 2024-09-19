@@ -236,7 +236,7 @@ const PausedOrders = ({ setValue }: PausedOrdersProps) => {
 												variant="body2"
 												className="font-semibold text-lg"
 											>
-												Total
+												Total: <span className="italic font-serif">(without delivery)</span>
 											</Typography>
 											<div className="flex items-center">
 												<Typography className="text-lg font-bold text-green-600">

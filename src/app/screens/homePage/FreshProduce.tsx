@@ -12,20 +12,18 @@ const freshProduceRetriever = createSelector(
 );
 
 const FreshProduce = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
-		const { freshProduceSection } = useSelector(freshProduceRetriever);
+	const { freshProduceSection } = useSelector(freshProduceRetriever);
 
-		
-
-		return (
-			<Container
-				moreLink="/store/products/fresh-produce"
-				sectionName={"Fresh Produce Section"}
-				productData={freshProduceSection}
-				cartItems={cartItems}
-				onAdd={onAdd}
-				onDeleteAll={onDeleteAll}
-			/>
-		);
+	return (
+		<Container
+			moreLink="/store/products/fresh-produce"
+			sectionName={"Fresh Produce Section"}
+			productData={freshProduceSection}
+			cartItems={cartItems}
+			onAdd={onAdd}
+			onDeleteAll={onDeleteAll}
+		/>
+	);
 };
 
 export default FreshProduce;

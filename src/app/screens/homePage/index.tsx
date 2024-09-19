@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import ProductService from "../../services/ProductService";
@@ -26,6 +26,9 @@ import BakeryItems from "./BakeryItems";
 import CannedFoods from "./CannedFoods";
 import Beverages from "./Beverages";
 import { motion } from "framer-motion";
+import { MdContactPhone } from "react-icons/md";
+import Tooltip from "@mui/material/Tooltip";
+import { NavLink } from "react-router-dom";
 
 // REDUX SLICE:
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -49,7 +52,24 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 		setTopUsers,
 	} = actionDispatch(useDispatch());
 
+	const [isScrolled, setIsScrolled] = useState<boolean>(false);
+	const [hovered, setHovered] = useState<boolean>(false);
 	const { setOrderBuilder, updateNum } = useGlobals();
+
+	const handleScroll = () => {
+		if (window.scrollY > 40) {
+			setIsScrolled(true);
+		} else {
+			setIsScrolled(false);
+		}
+	};
+
+	useEffect(() => {
+		window.addEventListener("scroll", handleScroll);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, []);
 
 	useEffect(() => {
 		const productService = new ProductService();
@@ -60,7 +80,7 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 			.getProductsBySort({
 				page: 1,
 				limit: 7,
-				order: "productViews",
+				order: "createdAt",
 				productCollection: ProductCollection.FRESH_PRODUCE,
 			})
 			.then((data) => setFreshProduce(data))
@@ -70,7 +90,7 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 			.getProductsBySort({
 				page: 1,
 				limit: 7,
-				order: "productViews",
+				order: "createdAt",
 				productCollection: ProductCollection.DAIRY_PRODUCTS,
 			})
 			.then((data) => setDairyProducts(data))
@@ -80,7 +100,7 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 			.getProductsBySort({
 				page: 1,
 				limit: 7,
-				order: "productViews",
+				order: "createdAt",
 				productCollection: ProductCollection.MEAT_AND_POULTRY,
 			})
 			.then((data) => setMeatPoultry(data))
@@ -90,7 +110,7 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 			.getProductsBySort({
 				page: 1,
 				limit: 7,
-				order: "productViews",
+				order: "createdAt",
 				productCollection: ProductCollection.BAKERY_ITEMS,
 			})
 			.then((data) => setBakeryItems(data))
@@ -100,8 +120,8 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 			.getProductsBySort({
 				page: 1,
 				limit: 7,
-				order: "productViews",
-				productCollection: ProductCollection.CANNED_GOODS,
+				order: "createdAt",
+				productCollection: ProductCollection.CANNED_FOODS,
 			})
 			.then((data) => setCannedFoods(data))
 			.catch((err) => console.log("Error on data setCannedFoods =>", err));
@@ -110,7 +130,7 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 			.getProductsBySort({
 				page: 1,
 				limit: 7,
-				order: "productViews",
+				order: "createdAt",
 				productCollection: ProductCollection.BEVERAGES,
 			})
 			.then((data) => setBeverages(data))
@@ -166,14 +186,35 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 						onAdd={onAdd}
 						onDeleteAll={onDeleteAll}
 					/>
+					<TopUsers />
 				</>
-				<TopUsers />
+			</div>
+
+			<div className="fixed bottom-10 right-10">
+				<Tooltip
+					title="Contact Us"
+					arrow
+					open={hovered}
+					enterDelay={200}
+					leaveDelay={200}
+				>
+					<motion.div
+						initial={{ opacity: 0, scale: 0.8 }}
+						animate={
+							isScrolled ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
+						}
+						transition={{ duration: 0.3 }}
+						onMouseEnter={() => setHovered(true)}
+						onMouseLeave={() => setHovered(false)}
+					>
+						<NavLink target="_blank" to={"http://ibrohimbek.link/"}>
+							<MdContactPhone className="text-green-500 text-5xl hover:scale-110 transition-all ease-linear duration-200 hover:rotate-180" />
+						</NavLink>
+					</motion.div>
+				</Tooltip>
 			</div>
 		</motion.div>
 	);
 };
-
-
-// TODO: Shu qismiga keldim. Sh qismiga contact float icon qo'shishim kerak
 
 export default HomePage;

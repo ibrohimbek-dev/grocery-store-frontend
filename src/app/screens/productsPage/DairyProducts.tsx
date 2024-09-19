@@ -8,8 +8,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { ProductCollection } from "../../../lib/enums/product.enum";
 import ProductService from "../../services/ProductService";
 import Container from "./Container";
+import { useGlobals } from "../../hooks/useGlobal";
 
-// REDUX SLICE & SELEVCTOR:
+// REDUX SLICE & SELECTOR:
 const actionDispatch = (dispatch: Dispatch) => ({
 	setDairyProducts: (data: Product[]) => dispatch(setDairyProducts(data)),
 });
@@ -21,7 +22,8 @@ const dairyProductsRetriever = createSelector(
 
 const DairyProducts = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 	const { setDairyProducts } = actionDispatch(useDispatch());
-	const { dairyProductsSection } = useSelector(dairyProductsRetriever);
+  const { dairyProductsSection } = useSelector(dairyProductsRetriever);
+  const { updateNum } = useGlobals();
 
 	const [productSearch, setProductSearch] = useState<ProductInquiry>({
 		page: 1,
@@ -39,7 +41,7 @@ const DairyProducts = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 			.then((data) => setDairyProducts(data))
 			.catch((er) => console.log("Error on DairyProducts.tsx"));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [productSearch]);
+	}, [productSearch, updateNum]);
 	
 	return (
 		<Container

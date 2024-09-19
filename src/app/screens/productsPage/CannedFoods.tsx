@@ -8,6 +8,7 @@ import { ProductCollection } from "../../../lib/enums/product.enum";
 import Container from "./Container";
 import { setCannedFoods } from "./slice";
 import { retrieveCannedFoods } from "./selector";
+import { useGlobals } from "../../hooks/useGlobal";
 
 // REDUX SLICE & SELECTOR
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -18,15 +19,17 @@ const cannedFoodRetriever = createSelector(
 	retrieveCannedFoods,
 	(cannedFoodsSection) => ({ cannedFoodsSection })
 );
+
 const CannedFoods = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 	const { setCannedFoods } = actionDispatch(useDispatch());
 	const { cannedFoodsSection } = useSelector(cannedFoodRetriever);
+	const { updateNum } = useGlobals();
 
 	const [productSearch, setProductSearch] = useState<ProductInquiry>({
 		page: 1,
 		limit: 7,
 		order: "createdAt",
-		productCollection: ProductCollection.CANNED_GOODS,
+		productCollection: ProductCollection.CANNED_FOODS,
 		search: "",
 	});
 
@@ -39,7 +42,7 @@ const CannedFoods = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 			.catch((err) => console.log("Error on CannedFoods.tsx", err));
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [productSearch]);
+	}, [productSearch, updateNum]);
 	return (
 		<Container
 			productData={cannedFoodsSection}

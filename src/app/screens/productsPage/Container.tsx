@@ -41,13 +41,13 @@ const Container: React.FC<ContainerProps> = ({
 	const handleClose = () => {
 		setModalOpen(false);
 		setIsProductId("");
-		setUpdateNum(12);
+		setUpdateNum(123);
 	};
 
 	const setModalOpenData = (productId: string) => {
 		setIsProductId(productId);
 		setModalOpen(true);
-		setUpdateNum(13);
+		setUpdateNum(133);
 	};
 
 	useEffect(() => {

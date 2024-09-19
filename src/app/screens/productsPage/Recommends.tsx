@@ -8,6 +8,7 @@ import { ProductStatus } from "../../../lib/enums/product.enum";
 import Container from "./Container";
 import { setRecommends } from "./slice";
 import { retrieveRecommends } from "./selector";
+import { useGlobals } from "../../hooks/useGlobal";
 
 // REDUX SLICE & SELECTOR
 const actionDispatch = (dispatch: Dispatch) => ({
@@ -21,7 +22,8 @@ const recommendsRetriever = createSelector(
 
 const Recommends = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 	const { setRecommends } = actionDispatch(useDispatch());
-	const { recommendsSection } = useSelector(recommendsRetriever);
+  const { recommendsSection } = useSelector(recommendsRetriever);
+  const { updateNum } = useGlobals();
 
 	const [productSearch, setProductSearch] = useState<ProductInquiry>({
 		page: 1,
@@ -40,7 +42,7 @@ const Recommends = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 			.catch((err) => console.log("Error on Recommends.tsx", err));
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [productSearch]);
+	}, [productSearch, updateNum]);
 	return (
 		<Container
 			productData={recommendsSection}
