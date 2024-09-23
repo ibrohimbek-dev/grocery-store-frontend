@@ -151,7 +151,8 @@ class UserService {
 	): Promise<UserPaymentInput> {
 		try {
 			const url = `${this.path}/user/payment/${userId}`;
-			const result = await axios.get(url, { withCredentials: true });
+      const result = await axios.get(url, { withCredentials: true });
+      console.log("result =>", result)
 			return result.data;
 		} catch (error) {
 			console.log("Error on getUserPaymentDataById =>", error);

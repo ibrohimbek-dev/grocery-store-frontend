@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import SearchIcon from "@mui/icons-material/Search";
 
 import { Menu, MenuItem } from "@mui/material";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
@@ -12,12 +11,15 @@ import {
 	sweetTopSmallSuccessAlert,
 } from "../../../lib/sweetAlert";
 import { useGlobals } from "../../hooks/useGlobal";
-import { BasketProps, T } from "../../../lib/types/common";
+import { BasketProps } from "../../../lib/types/common";
 import { Messages } from "../../../lib/config";
 import UserService from "../../services/UserService";
 import OrderService from "../../services/OrderService";
 import { motion } from "framer-motion";
 import { MdOutlineMenuOpen } from "react-icons/md";
+import SearchBar from "./SearchBar";
+
+// REDUX SELECTOR
 
 const Navbar = (props: BasketProps) => {
 	const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = props;
@@ -67,23 +69,8 @@ const Navbar = (props: BasketProps) => {
 		setOpenSidebar(!openSidebar);
 	};
 
-	const handleClickSearch = () => {
-		alert("Click search is coming soon!");
-	};
-
-	const handleClickOnChange = (e: T) => {
-    // console.log(e)
-    // TODO: Shu qismiga keldim. Shu qismida umumiy search qismini qilishim kerak
-	};
-
-	const handleOnKeyDown = (e: T) => {
-		if (e.keyCode === 13 || e.key === "Enter") {
-			alert("On key down is coming soon!");
-		}
-	};
-
 	const handleClickThemeMode = () => {
-		// TODO: Night mode is always false
+		// NIGHT-MODE: Night mode is always false
 		sweetTopSmallInfoAlert(
 			"Night and Dark mode disabled by developers!",
 			5000
@@ -195,24 +182,7 @@ const Navbar = (props: BasketProps) => {
 					</div>
 				</div>
 
-				{isHome && (
-					<div className="flex w-1/2 items-center justify-between p-4 bg-transform">
-						<div className="rounded-lg space-x-1 w-full flex items-center">
-							<input
-								className="w-full text-base shadow-md px-3 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent text-gray-700 placeholder-gray-400"
-								placeholder="Search..."
-								onChange={(e) => handleClickOnChange(e)}
-								onKeyDown={handleOnKeyDown}
-							/>
-							<div
-								onClick={handleClickSearch}
-								className="p-2 cursor-pointer shadow-md border border-gray-300 rounded-lg"
-							>
-								<SearchIcon sx={{ fontSize: 34 }} />
-							</div>
-						</div>
-					</div>
-				)}
+				{isHome && <SearchBar />}
 
 				<div className=" w-3/10 flex justify-end items-center">
 					<div className="flex space-x-3 justify-center items-center">

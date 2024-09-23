@@ -11,8 +11,9 @@ interface GBInterface {
 	setUpdateNum: (num: number) => void;
 	updateNum: number;
 	openSidebar: boolean;
-  setOpenSidebar: (input: boolean) => void;
-  
+	setOpenSidebar: (input: boolean) => void;
+	showHero: boolean;
+	setShowHero: (input: boolean) => void;
 }
 
 export const GlobalContext = createContext<GBInterface | undefined>(undefined);

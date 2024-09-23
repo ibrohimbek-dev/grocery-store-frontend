@@ -2,7 +2,7 @@ import React from "react";
 import { createSelector } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import Container from "./Container";
-import { CardActionsProps } from "../../../lib/types/common";
+import { HomeComponentProps } from "../../../lib/types/common";
 import { retrieveFreshProduce } from "./selector";
 
 // REDUX SELECTOR:
@@ -11,7 +11,11 @@ const freshProduceRetriever = createSelector(
 	(freshProduceSection) => ({ freshProduceSection })
 );
 
-const FreshProduce = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
+const FreshProduce = ({
+	onAdd,
+	cartItems,
+	onDeleteAll,
+}: HomeComponentProps) => {
 	const { freshProduceSection } = useSelector(freshProduceRetriever);
 
 	return (

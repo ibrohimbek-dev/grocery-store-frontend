@@ -11,11 +11,7 @@ import {
 	AccordionDetails,
 } from "@mui/material";
 
-import CloseIcon from "@mui/icons-material/Close";
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
+import CloseIcon from "@mui/icons-material/Close"
 import { serverApi } from "../../../lib/config";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Pagination } from "swiper";

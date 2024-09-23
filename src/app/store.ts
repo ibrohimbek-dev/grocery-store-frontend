@@ -4,6 +4,7 @@ import HomePageReducer from "./screens/homePage/slice";
 import OrderPageReducer from "./screens/ordersPage/slice";
 import ProductPageReducer from "./screens/productsPage/slice";
 import usersPageReducer from "./screens/usersPage/slice";
+import SearchProductReducer from "./components/header/searchSlice";
 
 export const store = configureStore({
 	reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
 		orderPage: OrderPageReducer,
 		usersPage: usersPageReducer,
 		modalPage: ModalProductPageReducer,
+		searchProduct: SearchProductReducer,
 	},
 });
 

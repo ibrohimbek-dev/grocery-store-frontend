@@ -1,15 +1,22 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Autoplay, Pagination } from "swiper";
-import { FreeMode, Navigation, Thumbs } from "swiper";
+import {
+	Swiper as SwiperCore,
+	Autoplay,
+	Navigation,
+	Pagination,
+	FreeMode,
+	Thumbs,
+} from "swiper";
+
 import { motion } from "framer-motion";
 
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
+
+import { useGlobals } from "../../hooks/useGlobal";
 
 const HeroSlider = () => {
+	const { showHero } = useGlobals();
+
 	const images: string[] = [
 		"/img/assets/main-1.webp",
 		"/img/assets/main-2.webp",
@@ -28,9 +35,13 @@ const HeroSlider = () => {
 			animate={{ scale: 1 }}
 			exit={{ scale: 0.8 }}
 			transition={{ duration: 0.3 }}
-			className="w-screen mb-10 product-img-carousel flex items-center justify-center flex-col space-y-4 overflow-hidden rounded-md"
+			className={
+				showHero
+					? "hidden"
+					: "flex w-screen items-center justify-center flex-col overflow-hidden rounded-md"
+			}
 		>
-			<div className="w-full overflow-hidden space-y-4 h-full flex flex-col justify-center items-center">
+			<div className="w-full overflow-hidden my-10 h-full flex flex-col justify-center items-center">
 				<Swiper
 					className="h-auto w-full rounded-md overflow-hidden swiper-area"
 					loop={true}
@@ -38,13 +49,14 @@ const HeroSlider = () => {
 					initialSlide={0}
 					centeredSlides={false}
 					navigation={true}
-					modules={[FreeMode, Navigation, Thumbs, Autoplay]}
+          modules={[FreeMode, Navigation, Thumbs, Autoplay]}
+          // TODO: Later uncomment this line and fix it
 					// autoplay={{
-					// 	delay: 5000, // Delay between slides in milliseconds
-					// 	disableOnInteraction: false, // Don't disable autoplay when user interacts
-					// 	pauseOnMouseEnter: true, // Pause autoplay when mouse hovers over the carousel
+					// 	delay: 5000, 
+					// 	disableOnInteraction: false,
+					// 	pauseOnMouseEnter: true,
 					// }}
-					speed={1500} // Slide transition speed in milliseconds
+					speed={1500}
 				>
 					{images?.length > 0 &&
 						images?.map((url, index) => (

@@ -10,11 +10,15 @@ import { T } from "../../../lib/types/common";
 import { useNavigate } from "react-router-dom";
 import { useGlobals } from "../../hooks/useGlobal";
 import { Messages } from "../../../lib/config";
-import { sweetTopSmallErrorAlert, sweetTopSmallInfoAlert } from "../../../lib/sweetAlert";
+import {
+	sweetTopSmallErrorAlert,
+	sweetTopSmallInfoAlert,
+} from "../../../lib/sweetAlert";
 import OrderService from "../../services/OrderService";
 import { motion } from "framer-motion";
+import ProductService from "../../services/ProductService";
 
-interface CardActionsProps {
+interface HomeComponentProps {
 	productData?: Product | null;
 	onAdd: (item: CartItem) => void;
 	onDeleteAll: () => void;
@@ -26,11 +30,17 @@ const CardActions = ({
 	onAdd,
 	onDeleteAll,
 	cartItems,
-}: CardActionsProps) => {
+}: HomeComponentProps) => {
 	const [badgeLength, setBadgeLength] = useState<number>(0);
+	const [heartBadge, setHeartBadge] = useState<number | undefined>(
+		productData?.productLikes
+	);
 	const [cartUpdated, setCartUpdated] = useState<boolean>(false);
 	const [openAlert, setOpenAlert] = useState<boolean>(false);
-	const { authUser, setOrderBuilder } = useGlobals();
+	const [isLiked, setIsLiked] = useState<boolean>(false);
+	const { authUser, setOrderBuilder, updateNum } = useGlobals();
+
+	const userId = authUser?._id;
 
 	const navigate = useNavigate();
 
@@ -53,7 +63,6 @@ const CardActions = ({
 				setBadgeLength(0);
 			}
 		} else {
-			console.log("No cart data found.");
 			setBadgeLength(0);
 		}
 	}, [productData, cartUpdated, cartData]); // Depend on cartUpdated
@@ -100,9 +109,37 @@ const CardActions = ({
 		}
 	};
 
+	useEffect(() => {
+		const productService = new ProductService();
+
+		if (userId) {
+			productService
+				.getMyProductLikes(userId)
+				.then((data) => {
+					const likedProduct = data?.some((like) => {
+						return like.likeRefId === productData?._id;
+					});
+
+					setIsLiked(!!likedProduct);
+				})
+				.catch((err) => console.log("err =>", err));
+		}
+	}, [userId, productData, updateNum]);
+
 	const handleLikeBtn = (productId: string) => {
-    console.log("like productId =>", productId);
-    sweetTopSmallInfoAlert(Messages.COMING_SOON).then();
+		const productService = new ProductService();
+
+		if (productId?.length > 0 && userId) {
+			productService
+				.likeTargetProduct(productId)
+				.then((data) => {
+					setHeartBadge(data?.productLikes);
+					setIsLiked((prev) => !prev);
+				})
+				.catch((err) => console.log("Error on handleLikeBtn =>", err));
+		} else if (!userId) {
+			sweetTopSmallInfoAlert("To like this item, please login first!").then();
+		}
 	};
 
 	return (
@@ -151,13 +188,11 @@ const CardActions = ({
 						aria-label="Add to favorites"
 						sx={{ width: "15%" }} // Set width to 15%
 					>
-						<Badge badgeContent={productData?.productLikes} color="success">
+						<Badge badgeContent={heartBadge} color="success">
 							<FavoriteIcon
 								sx={{
-									color:
-										productData?.productLikes! > 0
-											? "secondary.main"
-											: "action.disabled",
+									color: isLiked ? "secondary.main" : "action.disabled",
+									cursor: "pointer",
 								}}
 							/>
 						</Badge>
@@ -179,4 +214,3 @@ const CardActions = ({
 export default CardActions;
 
 // DONE!
-// TODO: Bu qismida like'lar bilan ishlashim kerak

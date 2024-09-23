@@ -13,10 +13,10 @@ export interface BasketProps {
 }
 
 
-export interface CardActionsProps {
+export interface HomeComponentProps {
 	cartItems: CartItem[];
-	onAdd: (item: CartItem) => void;	
-	onDeleteAll: () => void;
+	onAdd: (item: CartItem) => void;
+	onDeleteAll: () => void;	
 }
 
 export interface AuthModalProps {

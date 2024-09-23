@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import FreshProduce from "./FreshProduce";
-import { CardActionsProps } from "../../../lib/types/common";
+import { HomeComponentProps } from "../../../lib/types/common";
 import DairyProducts from "./DairyProducts";
 import Recommends from "./Recommends";
 import Discounts from "./Discounts";
@@ -12,7 +12,11 @@ import CannedFoods from "./CannedFoods";
 import Beverages from "./Beverages";
 import { motion } from "framer-motion";
 
-const ProductsPage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
+const ProductsPage = ({
+	onAdd,
+	cartItems,
+	onDeleteAll,
+}: HomeComponentProps) => {
 	return (
 		<motion.div
 			initial={{ scale: 0.8 }}

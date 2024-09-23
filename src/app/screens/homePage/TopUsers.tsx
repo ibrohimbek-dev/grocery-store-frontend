@@ -8,7 +8,7 @@ import { serverApi } from "../../../lib/config";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 
-import "swiper/css";
+
 import { GoArrowUpRight } from "react-icons/go";
 import { NavLink } from "react-router-dom";
 

@@ -13,7 +13,7 @@ const Footer = () => {
 			animate={{ scale: 1 }}
 			exit={{ scale: 0.8 }}
 			transition={{ duration: 0.3 }}
-			className="bg-green-800 text-white py-12 w-full"
+			className="bg-green-800 pt-4 text-white w-full"
 		>
 			<div className="main-container mx-auto flex flex-col md:flex-row justify-between">
 				<div className="flex flex-col mb-8 md:mb-0">
@@ -104,7 +104,7 @@ const Footer = () => {
 				</div>
 			</div>
 			<div className="border-t border-white mt-8 opacity-50"></div>
-			<div className="text-center flex flex-col mt-4 text-sm">
+			<div className="text-center flex flex-col mt-4 mb-2 text-sm">
 				<span>{new Date().getFullYear()} My Fresh Market</span>
 				<span>&copy; Copyright Grocery Store, All rights reserved.</span>
 			</div>

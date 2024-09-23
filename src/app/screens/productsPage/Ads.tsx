@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CardActionsProps } from "../../../lib/types/common";
+import { HomeComponentProps } from "../../../lib/types/common";
 import { Product, ProductInquiry } from "../../../lib/types/product";
 import { Dispatch, createSelector } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,10 +19,10 @@ const adsRetriever = createSelector(retrieveAds, (adsSection) => ({
 	adsSection,
 }));
 
-const Ads = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
+const Ads = ({ onAdd, cartItems, onDeleteAll }: HomeComponentProps) => {
 	const { setAds } = actionDispatch(useDispatch());
-  const { adsSection } = useSelector(adsRetriever);
-  const { updateNum } = useGlobals();
+	const { adsSection } = useSelector(adsRetriever);
+	const { updateNum } = useGlobals();
 
 	const [productSearch, setProductSearch] = useState<ProductInquiry>({
 		page: 1,

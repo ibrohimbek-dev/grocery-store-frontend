@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CardActionsProps } from "../../../lib/types/common";
+import { HomeComponentProps } from "../../../lib/types/common";
 import { Product, ProductInquiry } from "../../../lib/types/product";
 import { Dispatch, createSelector } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,7 +20,7 @@ const cannedFoodRetriever = createSelector(
 	(cannedFoodsSection) => ({ cannedFoodsSection })
 );
 
-const CannedFoods = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
+const CannedFoods = ({ onAdd, cartItems, onDeleteAll }: HomeComponentProps) => {
 	const { setCannedFoods } = actionDispatch(useDispatch());
 	const { cannedFoodsSection } = useSelector(cannedFoodRetriever);
 	const { updateNum } = useGlobals();

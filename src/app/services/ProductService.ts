@@ -1,4 +1,5 @@
 import { serverApi } from "../../lib/config";
+import { Like } from "../../lib/types/like";
 import { Product, ProductInquiry } from "../../lib/types/product";
 import axios from "axios";
 
@@ -40,6 +41,30 @@ class ProductService {
 			return result.data;
 		} catch (error) {
 			console.log("Error on increaseProductView =>", error);
+			throw error;
+		}
+	}
+
+	public async likeTargetProduct(productId: string): Promise<Product> {
+		try {
+			const url = `${this.path}/user/product/like/${productId}`;
+			const result = await axios.get(url, { withCredentials: true });
+
+			return result.data;
+		} catch (error) {
+			console.log("Error on likeTargetProduct =>", error);
+			throw error;
+		}
+	}
+
+	public async getMyProductLikes(userId: string): Promise<Like[] | null> {
+		try {
+			const url = `${this.path}/user/product/get/likes/${userId}`;
+			const result = await axios.get(url, { withCredentials: true });
+
+			return result.data;
+		} catch (error) {
+			console.log("Error on getMyLikes =>", error);
 			throw error;
 		}
 	}

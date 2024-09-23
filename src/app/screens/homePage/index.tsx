@@ -17,7 +17,7 @@ import {
 	setBakeryItems,
 } from "./slice";
 import TopUsers from "./TopUsers";
-import { CardActionsProps } from "../../../lib/types/common";
+import { HomeComponentProps } from "../../../lib/types/common";
 import { useGlobals } from "../../hooks/useGlobal";
 import FreshProduce from "./FreshProduce";
 import DairyProducts from "./DairyProducts";
@@ -42,7 +42,7 @@ const actionDispatch = (dispatch: Dispatch) => ({
 	setTopUsers: (data: User[]) => dispatch(setTopUsers(data)),
 });
 
-const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
+const HomePage = ({ onAdd, cartItems, onDeleteAll }: HomeComponentProps) => {
 	const {
 		setFreshProduce,
 		setDairyProducts,
@@ -169,9 +169,9 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 			transition={{ duration: 0.3 }}
 			className=" overflow-hidden w-full flex flex-row justify-center items-center"
 		>
-			<div className="flex flex-col w-full items-center space-y-10 mt-4">
+			<div className="flex flex-col w-full items-center">
 				<HeroSlider />
-				<>
+				<div className="flex flex-col w-full h-full items-center justify-center space-y-8">
 					<FreshProduce
 						cartItems={cartItems}
 						onAdd={onAdd}
@@ -203,7 +203,7 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 						onDeleteAll={onDeleteAll}
 					/>
 					<TopUsers />
-				</>
+				</div>
 			</div>
 
 			<div className="fixed bottom-10 right-10">

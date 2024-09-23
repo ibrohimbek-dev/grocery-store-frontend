@@ -9,10 +9,15 @@ export interface AppRootState {
 	orderPage: OrderPageState;
 	modalPage: ModalProductState;
 	usersPage: UsersPagetState;
+	searchProduct: SearchProductState;
 }
 
 export interface ModalProductState {
 	modalProduct: Product | null;
+}
+
+export interface SearchProductState {
+	searchText: string;
 }
 
 export interface UsersPagetState {

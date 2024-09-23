@@ -25,10 +25,7 @@ import CardActions from "../actions/CardActions";
 import { CartItem } from "../../../lib/types/search";
 import { motion } from "framer-motion";
 
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
-import "swiper/css/thumbs";
+
 
 interface ModalProps {
 	productId: string;

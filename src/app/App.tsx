@@ -22,6 +22,10 @@ import { motion } from "framer-motion";
 
 import "../css/main.css";
 import "../css/app.css";
+import "swiper/css/free-mode";
+import "swiper/css/navigation";
+import "swiper/css/thumbs";
+import "swiper/css";
 
 const App = () => {
 	const { darkMode } = useGlobals();
@@ -147,7 +151,9 @@ const App = () => {
 						</Routes>
 					</motion.div>
 
-					<Footer />
+					<div className={isHome ? "relative w-full" : "hidden"}>
+						<Footer />
+					</div>
 
 					<>
 						<Sidebar />

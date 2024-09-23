@@ -20,6 +20,7 @@ const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
 	const [orderBuilder, setOrderBuilder] = useState<Date>(new Date());
 	const [updateNum, setUpdateNum] = useState<number>(0);
 	const [openSidebar, setOpenSidebar] = useState<boolean>(false);
+	const [showHero, setShowHero] = useState<boolean>(false);
 
 	return (
 		<GlobalContext.Provider
@@ -34,6 +35,8 @@ const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
 				updateNum,
 				openSidebar,
 				setOpenSidebar,
+				setShowHero,
+				showHero,
 			}}
 		>
 			{children}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CardActionsProps } from "../../../lib/types/common";
+import { HomeComponentProps } from "../../../lib/types/common";
 import { Product, ProductInquiry } from "../../../lib/types/product";
 import { Dispatch, createSelector } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,10 +20,10 @@ const discountsRetriever = createSelector(
 	(discountsSection) => ({ discountsSection })
 );
 
-const Discounts = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
+const Discounts = ({ onAdd, cartItems, onDeleteAll }: HomeComponentProps) => {
 	const { setDiscounts } = actionDispatch(useDispatch());
-  const { discountsSection } = useSelector(discountsRetriever);
-  const { updateNum } = useGlobals();
+	const { discountsSection } = useSelector(discountsRetriever);
+	const { updateNum } = useGlobals();
 
 	const [productSearch, setProductSearch] = useState<ProductInquiry>({
 		page: 1,

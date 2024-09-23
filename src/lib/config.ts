@@ -15,7 +15,7 @@ export const Messages = {
 	MAX_PRODUCT_COUNT: "You reached the maximum amount of product!",
 	COMING_SOON: "Coming soon!",
 	INVALID_CARD_NUMBER:
-		"Invalid card number. Please use the format: 1234 5678  90123 4567",
+		"Invalid card number. Please use the format: 1234 5678  9012 4567",
 	INVALID_EXP_DATE: "Invalid expiration date. Please use the format: MM/YY",
 	INVALID_CVV: "Invalid CVV. Please enter a 3-digit number.",
 	CARD_HOLDER_EMPTY: "Cardholder name cannot be empty.",
@@ -24,8 +24,9 @@ export const Messages = {
 	ADD_YOUR_CARD: "To continue, add your credit card first!",
 	RECEIVED_ORDER: "Have you received your order?",
 	PAYMENT_PROCCEED: "Do you want to proceed with payment?",
-  CANCEL_ORDER: "Do you want to cancel this order?",
-  DELETE_HISTORY: "Do you want to delete this order history?",
-  DELETED_SUCCESSFULLY: "Order history deleted successfully!",
-  SEND_SUCCESSFULLY: "Message send successfully!"
+	CANCEL_ORDER: "Do you want to cancel this order?",
+	DELETE_HISTORY: "Do you want to delete this order history?",
+	DELETED_SUCCESSFULLY: "Order history deleted successfully!",
+	SEND_SUCCESSFULLY: "Message send successfully!",
+	TYPE_SEARCH_TERM: "Please type a search term.",
 };

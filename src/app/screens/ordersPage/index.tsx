@@ -109,7 +109,6 @@ const OrdersPage = () => {
 			sweetErrorSmallHandling(error).then();
 		}
 	};
-	console.log("User Payment =>", userPayment);
 
 	if (!authUser) {
 		sweetPopupErrorHandling(Messages.LOGIN_REQUIRED).then();

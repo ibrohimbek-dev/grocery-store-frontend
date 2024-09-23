@@ -1,5 +1,5 @@
 import React from "react";
-import { CardActionsProps } from "../../../lib/types/common";
+import { HomeComponentProps } from "../../../lib/types/common";
 import { createSelector } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import Container from "./Container";
@@ -11,7 +11,7 @@ const meatPoultryRetriever = createSelector(
 	(meatPoultrySection) => ({ meatPoultrySection })
 );
 
-const MeatPoultry = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
+const MeatPoultry = ({ onAdd, cartItems, onDeleteAll }: HomeComponentProps) => {
 	const { meatPoultrySection } = useSelector(meatPoultryRetriever);
 	return (
 		<Container

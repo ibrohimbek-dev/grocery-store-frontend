@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CardActionsProps } from "../../../lib/types/common";
+import { HomeComponentProps } from "../../../lib/types/common";
 import { Product, ProductInquiry } from "../../../lib/types/product";
 import { Dispatch, createSelector } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,10 +20,10 @@ const beveragesRetriever = createSelector(
 	(beveragesSection) => ({ beveragesSection })
 );
 
-const Beverages = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
+const Beverages = ({ onAdd, cartItems, onDeleteAll }: HomeComponentProps) => {
 	const { setBeverages } = actionDispatch(useDispatch());
-  const { beveragesSection } = useSelector(beveragesRetriever);
-  const { updateNum } = useGlobals();
+	const { beveragesSection } = useSelector(beveragesRetriever);
+	const { updateNum } = useGlobals();
 
 	const [productSearch, setProductSearch] = useState<ProductInquiry>({
 		page: 1,

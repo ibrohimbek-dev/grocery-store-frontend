@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CardActionsProps } from "../../../lib/types/common";
+import { HomeComponentProps } from "../../../lib/types/common";
 import { Dispatch, createSelector } from "@reduxjs/toolkit";
 import { Product, ProductInquiry } from "../../../lib/types/product";
 import { setDairyProducts } from "./slice";
@@ -20,10 +20,14 @@ const dairyProductsRetriever = createSelector(
 	(dairyProductsSection) => ({ dairyProductsSection })
 );
 
-const DairyProducts = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
+const DairyProducts = ({
+	onAdd,
+	cartItems,
+	onDeleteAll,
+}: HomeComponentProps) => {
 	const { setDairyProducts } = actionDispatch(useDispatch());
-  const { dairyProductsSection } = useSelector(dairyProductsRetriever);
-  const { updateNum } = useGlobals();
+	const { dairyProductsSection } = useSelector(dairyProductsRetriever);
+	const { updateNum } = useGlobals();
 
 	const [productSearch, setProductSearch] = useState<ProductInquiry>({
 		page: 1,
@@ -42,7 +46,7 @@ const DairyProducts = ({ onAdd, cartItems, onDeleteAll }: CardActionsProps) => {
 			.catch((er) => console.log("Error on DairyProducts.tsx"));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [productSearch, updateNum]);
-	
+
 	return (
 		<Container
 			productData={dairyProductsSection}
