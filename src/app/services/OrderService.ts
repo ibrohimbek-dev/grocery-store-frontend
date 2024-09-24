@@ -30,7 +30,6 @@ class OrderService {
 				withCredentials: true,
 			});
 
-			console.log("result on createOrder =>", result);
 			return result.data;
 		} catch (error) {
 			console.log("Error on createOrder =>", error);

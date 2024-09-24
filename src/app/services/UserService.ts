@@ -124,9 +124,8 @@ class UserService {
 	public async userLogout(): Promise<void> {
 		try {
 			const url = this.path + "/user/logout";
-			const result = await axios.post(url, {}, { withCredentials: true });
+			await axios.post(url, {}, { withCredentials: true });
 
-			console.log("User Logout =>", result);
 			localStorage.removeItem("userData");
 		} catch (error) {
 			console.log("Error on userLogout =>", error);
@@ -177,7 +176,6 @@ class UserService {
 		try {
 			const url = `${this.path}/user/payment/${userId}`;
 			const result = await axios.get(url, { withCredentials: true });
-			console.log("result =>", result);
 			return result.data;
 		} catch (error) {
 			console.log("Error on getUserPaymentDataById =>", error);

@@ -66,7 +66,6 @@ const Container = ({
 		setUpdateNum(1);
 	};
 
-	console.log("filteredProducts =>", filteredProducts);
 
 	return (
 		<>

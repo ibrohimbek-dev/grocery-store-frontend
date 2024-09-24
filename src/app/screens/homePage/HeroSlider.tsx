@@ -50,12 +50,12 @@ const HeroSlider = () => {
 					centeredSlides={false}
 					navigation={true}
 					modules={[FreeMode, Navigation, Thumbs, Autoplay]}
-					autoplay={{
-						delay: 5000,
-						disableOnInteraction: false,
-						pauseOnMouseEnter: true,
-					}}
-					speed={1500}
+					// autoplay={{
+					// 	delay: 5000,
+					// 	disableOnInteraction: false,
+					// 	pauseOnMouseEnter: true,
+					// }}
+					// speed={1500}
 				>
 					{images?.length > 0 &&
 						images?.map((url, index) => (

@@ -65,8 +65,7 @@ const FinishedOrders = () => {
 
 			if (confirmation) {
 				const orderService = new OrderService();
-				const result = await orderService.deleteOrderHistory(orderId);
-				console.log("result on deleteOrderHistory =>", result);
+				await orderService.deleteOrderHistory(orderId);
 				setOrderBuilder(new Date());
 				sweetTopSmallSuccessAlert(Messages.DELETED_SUCCESSFULLY).then();
 			}

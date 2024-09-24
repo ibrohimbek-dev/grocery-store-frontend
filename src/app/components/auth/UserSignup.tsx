@@ -84,7 +84,6 @@ const UserSignup: React.FC = () => {
 
 		try {
 			if (!validateSignUpForm()) {
-				console.log("showAlertMsg =>", showAlertMsg);
 				throw new Error(showAlertMsg);
 			}
 

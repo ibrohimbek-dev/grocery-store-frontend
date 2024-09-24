@@ -61,7 +61,6 @@ const UserLogin = () => {
 			};
 
 			const result = await userService.userLogin(loginInput);
-			console.log("result =>", result);
 			setAuthUser(result);
 			navigate(from);
 		} catch (err) {

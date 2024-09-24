@@ -47,7 +47,6 @@ const UserSettings = () => {
 			const userService = new UserService();
 			const result = await userService.updateUser(userUpdateInput);
 			setAuthUser(result);
-			console.log("result on user settings =>", result);
 			await sweetTopSmallSuccessAlert(Messages.MODIFIED_SUCCESSFULLY, 700);
 		} catch (error) {
 			console.log("Error on handleSubmitButton =>", error);
