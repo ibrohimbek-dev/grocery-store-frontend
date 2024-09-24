@@ -20,8 +20,9 @@ const activeUsersRetriver = createSelector(
 
 const ActiveUsers = () => {
 	const { setActiveUsers } = actionDispatch(useDispatch());
-	const { setOrderBuilder, updateNum } = useGlobals();
-	const { activeUsersSection } = useSelector(activeUsersRetriver);
+  const { setOrderBuilder, updateNum } = useGlobals();
+  const { activeUsersSection } = useSelector(activeUsersRetriver);
+  
 
 	const [userSearch, setUserSearch] = useState<UserInquiry>({
 		page: 1,
@@ -39,11 +40,12 @@ const ActiveUsers = () => {
 			.then((data) => setActiveUsers(data))
 			.catch((err) => console.log("Error on ActiveUsers.tsx =>", err));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [userSearch, updateNum]);
+  }, [userSearch, updateNum]);
+  
 
 	return (
 		<Container
-			usersData={activeUsersSection}
+			userData={activeUsersSection}
 			userSearch={userSearch}
 			setUserSearch={setUserSearch}
 		/>

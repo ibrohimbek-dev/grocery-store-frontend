@@ -7,6 +7,7 @@ import {
 } from "../../lib/types/user";
 import axios from "axios";
 import { serverApi } from "../../lib/config";
+import { Like } from "../../lib/types/like";
 
 class UserService {
 	private readonly path: string;
@@ -48,6 +49,30 @@ class UserService {
 			return result.data;
 		} catch (error) {
 			console.log("Error on increaseUserView =>", error);
+			throw error;
+		}
+	}
+
+	public async likeTargetUser(userId: string): Promise<User> {
+		try {
+			const url = `${this.path}/user/users/like/${userId}`;
+			const result = await axios.get(url, { withCredentials: true });
+
+			return result.data;
+		} catch (error) {
+			console.log("Error on likeTargetUser =>", error);
+			throw error;
+		}
+	}
+
+	public async getMyUserLikes(userId: string): Promise<Like[] | null> {
+		try {
+			const url = `${this.path}/user/users/get/likes/${userId}`;
+			const result = await axios.get(url, { withCredentials: true });
+
+			return result.data;
+		} catch (error) {
+			console.log("Error on getMyUserLikes =>", error);
 			throw error;
 		}
 	}
@@ -151,8 +176,8 @@ class UserService {
 	): Promise<UserPaymentInput> {
 		try {
 			const url = `${this.path}/user/payment/${userId}`;
-      const result = await axios.get(url, { withCredentials: true });
-      console.log("result =>", result)
+			const result = await axios.get(url, { withCredentials: true });
+			console.log("result =>", result);
 			return result.data;
 		} catch (error) {
 			console.log("Error on getUserPaymentDataById =>", error);

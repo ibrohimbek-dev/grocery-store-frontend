@@ -11,7 +11,6 @@ import {
 
 import { motion } from "framer-motion";
 
-
 import { useGlobals } from "../../hooks/useGlobal";
 
 const HeroSlider = () => {
@@ -27,7 +26,8 @@ const HeroSlider = () => {
 		"/img/assets/main-7.webp",
 	];
 
-	SwiperCore.use([FreeMode, Navigation, Thumbs, Autoplay, Pagination]);
+  SwiperCore.use([FreeMode, Navigation, Thumbs, Autoplay, Pagination]);
+
 
 	return (
 		<motion.div
@@ -49,13 +49,12 @@ const HeroSlider = () => {
 					initialSlide={0}
 					centeredSlides={false}
 					navigation={true}
-          modules={[FreeMode, Navigation, Thumbs, Autoplay]}
-          // TODO: Later uncomment this line and fix it
-					// autoplay={{
-					// 	delay: 5000, 
-					// 	disableOnInteraction: false,
-					// 	pauseOnMouseEnter: true,
-					// }}
+					modules={[FreeMode, Navigation, Thumbs, Autoplay]}
+					autoplay={{
+						delay: 5000,
+						disableOnInteraction: false,
+						pauseOnMouseEnter: true,
+					}}
 					speed={1500}
 				>
 					{images?.length > 0 &&

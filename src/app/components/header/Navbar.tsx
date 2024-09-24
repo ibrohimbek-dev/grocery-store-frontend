@@ -18,6 +18,7 @@ import OrderService from "../../services/OrderService";
 import { motion } from "framer-motion";
 import { MdOutlineMenuOpen } from "react-icons/md";
 import SearchBar from "./SearchBar";
+import Fade from "@mui/material/Fade";
 
 // REDUX SELECTOR
 
@@ -200,8 +201,14 @@ const Navbar = (props: BasketProps) => {
 								open={open}
 								onClose={handleClose}
 								MenuListProps={{
-									"aria-labelledby": "simple-menu",
+									"aria-labelledby": "fade-button",
 								}}
+								sx={{
+									display: "flex",
+									flexDirection: "column",
+									padding: 0,
+								}}
+								TransitionComponent={Fade}
 							>
 								<MenuItem onClick={handleClose}>
 									<NavLink

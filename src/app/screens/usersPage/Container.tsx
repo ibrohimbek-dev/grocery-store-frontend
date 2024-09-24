@@ -1,37 +1,39 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useGlobals } from "../../hooks/useGlobal";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { Messages, serverApi } from "../../../lib/config";
+import { serverApi } from "../../../lib/config";
 import SearchIcon from "@mui/icons-material/Search";
 import Pagination from "@mui/material/Pagination";
 import PaginationItem from "@mui/material/PaginationItem";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { motion } from "framer-motion";
-import { Badge, Button, Tooltip } from "@mui/material";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import { Snackbar, Alert } from "@mui/material";
+import {  Button } from "@mui/material";
+
 import { User, UserInquiry } from "../../../lib/types/user";
 import ModalUser from "./ModalUser";
-import { sweetTopSmallInfoAlert } from "../../../lib/sweetAlert";
 import { UserType } from "../../../lib/enums/user.enum";
+import UserCardActions from "./UserCardActions";
 
 interface ContainerProps {
-	usersData: User[];
+	userData: User[];
 	userSearch: UserInquiry;
 	setUserSearch: (search: UserInquiry) => void;
 }
 
 const Container: React.FC<ContainerProps> = ({
-	usersData,
+	userData,
 	userSearch,
 	setUserSearch,
 }) => {
 	const [searchText, setSearchText] = useState<string>("");
 	const [modalOpen, setModalOpen] = useState<boolean>(false);
 	const [isUserId, setIsUserId] = useState<string>("");
-	const [openAlert, setOpenAlert] = useState<boolean>(false);
+
+	
+
 	const { setUpdateNum } = useGlobals();
+	
 
 	const handleClose = () => {
 		setModalOpen(false);
@@ -77,15 +79,20 @@ const Container: React.FC<ContainerProps> = ({
 		}
 	};
 
-	const totalPages = Math.ceil(usersData.length / userSearch.limit);
+	const totalPages = Math.ceil(userData.length / userSearch.limit);
 
-	const handleLikeBtn = (userId: string) => {
-		setOpenAlert(true);
-		sweetTopSmallInfoAlert(Messages.COMING_SOON).then();
-		alert(userId);
-		console.log("like userId =>", userId);
-	};
+	// useEffect(() => {
+	// 	if (userData && userData.length > 0) {
+	// 		const totalLikes = userData.reduce((sum, user) => {
+	// 			return sum + user.userLikes;
+	// 		}, 0);
+	// 		setHeartBadge(totalLikes);
+	// 	} else {
+	// 		setHeartBadge(0);
+	// 	}
+	// }, [userData]);
 
+	
 	return (
 		<>
 			<motion.div
@@ -156,8 +163,8 @@ const Container: React.FC<ContainerProps> = ({
 				{/* Render user data */}
 				<div className="w-full">
 					<div className="grid p-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-						{usersData.length > 0 ? (
-							usersData.map((user) => {
+						{userData.length > 0 ? (
+							userData.map((user) => {
 								const imagePath = user?.userImage
 									? `${serverApi}/${user?.userImage}`
 									: "/icons/default-user.svg";
@@ -206,36 +213,9 @@ const Container: React.FC<ContainerProps> = ({
 											<p className="text-gray-700 text-sm mb-4">
 												{user.userDesc || "No description available."}
 											</p>
-											<div className="flex justify-between items-center">
-												<span className="text-gray-500">
-													Points: {user.userPoints}
-												</span>
-												<Tooltip title="Add to favorites this item">
-													<Button
-														variant="outlined"
-														color="secondary"
-														onClick={(e) => {
-															handleLikeBtn(user._id);
-															e.stopPropagation();
-														}}
-														aria-label="Add to favorites"
-													>
-														<Badge
-															badgeContent={user.userLikes}
-															color="success"
-														>
-															<FavoriteIcon
-																sx={{
-																	color:
-																		user.userLikes > 0
-																			? "secondary.main"
-																			: "action.disabled",
-																}}
-															/>
-														</Badge>
-													</Button>
-												</Tooltip>
-											</div>
+                      <>
+                        <UserCardActions user={user}/>
+                      </>
 										</div>
 										<Button
 											onClick={() => setModalOpenData(user._id)}
@@ -276,14 +256,6 @@ const Container: React.FC<ContainerProps> = ({
 			</motion.div>
 
 			<ModalUser userId={isUserId} open={modalOpen} handleClose={handleClose} />
-
-			<Snackbar
-				open={openAlert}
-				autoHideDuration={3000}
-				anchorOrigin={{ vertical: "top", horizontal: "center" }} // Positioning
-			>
-				<Alert severity="success">You liked succussfully!</Alert>
-			</Snackbar>
 		</>
 	);
 };

@@ -64,7 +64,7 @@ class ProductService {
 
 			return result.data;
 		} catch (error) {
-			console.log("Error on getMyLikes =>", error);
+			console.log("Error on getMyProductLikes =>", error);
 			throw error;
 		}
 	}

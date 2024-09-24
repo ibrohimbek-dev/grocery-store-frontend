@@ -58,7 +58,7 @@ const ModalUser = ({ userId, open, handleClose }: ModalProps) => {
 					</IconButton>
 				</div>
 
-				<div className="flex flex-row items-start justify-between">
+				<div className="flex space-x-2 flex-row items-start justify-between">
 					{/* User Image Section */}
 					<div className="h-full flex justify-center items-center w-full rounded-md overflow-hidden">
 						<img
@@ -80,7 +80,7 @@ const ModalUser = ({ userId, open, handleClose }: ModalProps) => {
 								aria-controls="panel1-content"
 								id="panel1-header"
 							>
-								<span className="font-semibold text-lg">About this user</span>
+								<span className="font-semibold px-2 text-lg">About this user</span>
 							</AccordionSummary>
 							<AccordionDetails className="overflow-auto max-h-60">
 								{" "}

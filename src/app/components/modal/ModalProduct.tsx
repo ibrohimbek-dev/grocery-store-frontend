@@ -142,7 +142,9 @@ const ModalProduct = ({
 								aria-controls="panel1-content"
 								id="panel1-header"
 							>
-								About this product
+								<span className="font-semibold px-2 text-lg">
+									About this product
+								</span>
 							</AccordionSummary>
 							<AccordionDetails className="overflow-auto max-h-60">
 								{" "}
