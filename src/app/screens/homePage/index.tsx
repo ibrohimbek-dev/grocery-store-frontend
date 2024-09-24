@@ -27,7 +27,6 @@ import CannedFoods from "./CannedFoods";
 import Beverages from "./Beverages";
 import { motion } from "framer-motion";
 import { MdContactPhone } from "react-icons/md";
-import Tooltip from "@mui/material/Tooltip";
 import { NavLink } from "react-router-dom";
 import { FaArrowUp } from "react-icons/fa";
 
@@ -207,27 +206,25 @@ const HomePage = ({ onAdd, cartItems, onDeleteAll }: HomeComponentProps) => {
 			</div>
 
 			<div className="fixed bottom-10 right-10">
-				<Tooltip title="Contact Us" arrow enterDelay={200} leaveDelay={200}>
-					<motion.div
-						initial={{ opacity: 0, scale: 0.8 }}
-						animate={
-							isScrolled ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
-						}
-						transition={{ duration: 0.3 }}
+				<motion.div
+					initial={{ opacity: 0, scale: 0.8 }}
+					animate={
+						isScrolled ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
+					}
+					transition={{ duration: 0.3 }}
+				>
+					<button
+						onClick={scrollToTop}
+						className={`${
+							isScrolled ? "flex" : "hidden"
+						} items-center justify-center p-2 mt-4 rounded-full bg-gray-800 text-white hover:bg-gray-600 transition`}
 					>
-						<button
-							onClick={scrollToTop}
-							className={`${
-								isScrolled ? "flex" : "hidden"
-							} items-center justify-center p-2 mt-4 rounded-full bg-gray-800 text-white hover:bg-gray-600 transition`}
-						>
-							<FaArrowUp className="text-xl hover:scale-110 duration-200 transition-all ease-linear cursor-pointer" />
-						</button>
-						<NavLink target="_blank" to={"http://ibrohimbek.link/"}>
-							<MdContactPhone className="text-green-500 text-5xl hover:scale-110 transition-all ease-linear duration-200" />
-						</NavLink>
-					</motion.div>
-				</Tooltip>
+						<FaArrowUp className="text-xl hover:scale-110 duration-200 transition-all ease-linear cursor-pointer" />
+					</button>
+					<NavLink target="_blank" to={"http://ibrohimbek.link/"}>
+						<MdContactPhone className="text-green-500 text-5xl hover:scale-110 transition-all ease-linear duration-200" />
+					</NavLink>
+				</motion.div>
 			</div>
 		</motion.div>
 	);
