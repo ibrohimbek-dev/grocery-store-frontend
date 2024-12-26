@@ -34,6 +34,7 @@
 		"react-router-dom": "^6.24.0",
 		"react-scripts": "5.0.0",
 		"redux-logger": "^3.0.6",
+		"socket.io-client": "^4.8.1",
 		"styled-components": "^6.1.11",
 		"sweetalert2": "^11.4.23",
 		"swiper": "8.3.1",
@@ -43,7 +44,8 @@
 		"web-vitals": "^2.1.4"
 	},
 	"devDependencies": {
-		"@types/axios": "^0.14.0",
+    "@types/socket.io-client": "^3.0.0",
+    "@types/axios": "^0.14.0",
 		"@types/jest": "^27.5.2",
 		"@types/node": "^17.0.45",
 		"@types/react": "^18.2.48",

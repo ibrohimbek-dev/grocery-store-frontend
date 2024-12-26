@@ -12,6 +12,7 @@ import App from "./app/App";
 // =============================================
 // CSS FILES:
 import "./input.css";
+import { SocketProvider } from "./app/context/SocketContext";
 
 
 const container = document.getElementById("root")!;
@@ -21,9 +22,11 @@ root.render(
 	<React.StrictMode>
 		<Provider store={store}>
 			<ContextProvider>
-				<Router>
-					<App />
-				</Router>
+				<SocketProvider>
+					<Router>
+						<App />
+					</Router>
+				</SocketProvider>
 			</ContextProvider>
 		</Provider>
 	</React.StrictMode>
