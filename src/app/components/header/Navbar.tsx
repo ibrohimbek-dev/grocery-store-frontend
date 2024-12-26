@@ -12,13 +12,15 @@ import {
 } from "../../../lib/sweetAlert";
 import { useGlobals } from "../../hooks/useGlobal";
 import { BasketProps } from "../../../lib/types/common";
-import { Messages } from "../../../lib/config";
+import { Messages, serverApi } from "../../../lib/config";
 import UserService from "../../services/UserService";
 import OrderService from "../../services/OrderService";
 import { motion } from "framer-motion";
 import { MdOutlineMenuOpen } from "react-icons/md";
 import SearchBar from "./SearchBar";
 import Fade from "@mui/material/Fade";
+import { GiStarFormation } from "react-icons/gi";
+import { UserType } from "../../../lib/enums/user.enum";
 
 // REDUX SELECTOR
 
@@ -269,6 +271,19 @@ const Navbar = (props: BasketProps) => {
 										Help Page
 									</NavLink>
 								</MenuItem>
+								{authUser?.userType === UserType.STORE_OWNER && (
+									<MenuItem onClick={handleClose}>
+										<a
+											className="hover:text-black flex justify-center items-center space-x-2 hover:font-semibold w-full"
+											href={`${serverApi}/admin`}
+											target="_blank" // Opens in a new tab
+											rel="noopener noreferrer" // Security best practice
+										>
+											<p>Dashboard</p>
+											<GiStarFormation className="text-yellow-500 text-xl" />
+										</a>
+									</MenuItem>
+								)}
 							</Menu>
 						</div>
 
