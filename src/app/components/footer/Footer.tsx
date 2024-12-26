@@ -15,7 +15,7 @@ const Footer = () => {
 			transition={{ duration: 0.3 }}
 			className="bg-green-800 pt-4 text-white w-full"
 		>
-			<div className="main-container mx-auto flex flex-col md:flex-row justify-between">
+			<div className="main-container 3xl:flex hidden mx-auto flex-col md:flex-row justify-between">
 				<div className="flex flex-col mb-8 md:mb-0">
 					<img
 						className="w-16 h-16 cursor-pointer hover:animate-spin duration-700 ease-linear"

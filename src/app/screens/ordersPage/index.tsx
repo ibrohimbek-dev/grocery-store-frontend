@@ -314,6 +314,8 @@ const OrdersPage = () => {
 							</div>
 						</div>
 
+            
+            {/* PAYMENT SECTION */}
 						<div className="order-info-box space-y-2 flex-col p-4 rounded-lg shadow flex-grow">
 							<form className="space-y-2">
 								<div className="relative flex space-x-2">

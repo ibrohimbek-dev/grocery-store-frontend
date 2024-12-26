@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { Badge, IconButton, Menu, Button } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
@@ -33,7 +33,7 @@ const Basket = (props: BasketProps) => {
 	const totalPrice = (itemPrice + shippingCost).toFixed(1);
 
 	// HANDLERS:
-	const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
 		setAnchorEl(e.currentTarget);
 	};
 

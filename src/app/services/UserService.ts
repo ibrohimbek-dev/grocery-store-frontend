@@ -15,6 +15,7 @@ class UserService {
 	constructor() {
 		this.path = serverApi;
 	}
+	
 
 	public async getTopUsers(): Promise<User[]> {
 		try {

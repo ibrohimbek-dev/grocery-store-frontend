@@ -30,8 +30,6 @@ const Container: React.FC<ContainerProps> = ({
 	const [modalOpen, setModalOpen] = useState<boolean>(false);
 	const [isUserId, setIsUserId] = useState<string>("");
 
-	
-
 	const { setUpdateNum } = useGlobals();
 	
 

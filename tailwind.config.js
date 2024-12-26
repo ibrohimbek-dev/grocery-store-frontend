@@ -11,10 +11,12 @@ module.exports = {
 				lg: "992px",
 				xl: "1024px",
 				"2xl": "1280px",
-				"3xl": "1536px",
-				"4xl": "1920px",
-				"5xl": "2560px",
-				"6xl": "3840px",
+				"3xl": "1399px",
+				"4xl": "1536px",
+				"5xl": "1799px",
+				"6xl": "1920px",
+				"7xl": "2560px",
+				"8xl": "3840px",
 			},
 
 			fontSize: {

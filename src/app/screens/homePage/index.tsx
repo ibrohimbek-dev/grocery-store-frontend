@@ -25,9 +25,9 @@ import MeatPoultry from "./MeatPoultry";
 import BakeryItems from "./BakeryItems";
 import CannedFoods from "./CannedFoods";
 import Beverages from "./Beverages";
+import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { MdContactPhone } from "react-icons/md";
-import { NavLink } from "react-router-dom";
 import { FaArrowUp } from "react-icons/fa";
 
 // REDUX SLICE:

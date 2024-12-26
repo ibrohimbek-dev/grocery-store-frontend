@@ -114,7 +114,7 @@ const Navbar = (props: BasketProps) => {
 			animate={{ scale: 1 }}
 			exit={{ scale: 0.8 }}
 			transition={{ duration: 0.3 }}
-			className="flex flex-col main-container"
+			className="3xl:flex hidden flex-col main-container"
 		>
 			<div className="flex justify-between">
 				<div className="flex justify-center items-center">
