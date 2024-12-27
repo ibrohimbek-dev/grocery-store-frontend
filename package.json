@@ -1,10 +1,12 @@
 {
-	"name": "shop-frontend",
+	"name": "frontend-store",
 	"version": "0.1.0",
 	"description": "This is shop react redux frontend project",
 	"private": true,
 	"scripts": {
-		"start": "set PORT=3006 && react-scripts start",
+		"start:dev": "set PORT=3006 && react-scripts start",
+		"start:prod": "react-scripts start",
+		"start": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
