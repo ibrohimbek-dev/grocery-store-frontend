@@ -1,22 +1,12 @@
 {
-<<<<<<< HEAD
-	"name": "grocery-store-frontend",
-=======
 	"name": "frontend-store",
->>>>>>> master
 	"version": "0.1.0",
 	"description": "This is grocery store react redux frontend project",
 	"private": true,
 	"scripts": {
-<<<<<<< HEAD
 		"start": "react-scripts start",
 		"start:dev": "set PORT=3006 && react-scripts start",
 		"start:prod": "serve -s build -t 80",
-=======
-		"start:dev": "set PORT=3006 && react-scripts start",
-		"start:prod": "react-scripts start",
-		"start": "react-scripts start",
->>>>>>> master
 		"build": "react-scripts build",
 		"test": "react-scripts test",
 		"eject": "react-scripts eject"
