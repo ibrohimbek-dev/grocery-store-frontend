@@ -1,0 +1,24 @@
+version: "3.4"
+
+services:
+  frontend-store:
+    container_name: frontend-store
+    restart: always
+    image: node:20.15.0
+    ports:
+      - 3003:3000
+    environment:
+      - PORT=3000
+
+    volumes:
+      - ./:/usr/src/frontend-react
+    working_dir: /usr/src/frontend-react
+    networks:
+      - client-network
+
+    # FOR PRODUCTION
+    command: bash -c "npm install --legacy-peer-deps && npm run build && npm run start"
+
+networks:
+  client-network:
+    driver: bridge
