@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Navbar from "./components/header/Navbar";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import Footer from "./components/footer/Footer";
@@ -28,7 +28,6 @@ import "swiper/css/thumbs";
 import "swiper/css";
 
 const App = () => {
-	const [isMobile, setIsMobile] = useState<boolean>(false);
 	const { darkMode } = useGlobals();
 	const { cartItems, onAdd, onRemove, onDelete, onDeleteAll } = useBasket();
 	const darkTheme = themeMode(darkMode);
@@ -72,17 +71,6 @@ const App = () => {
 				clearTimeout(resizeTimeout.current);
 			}
 		};
-	}, []);
-
-	useEffect(() => {
-		const handleResize = () => {
-			setIsMobile(window.innerWidth < 1400);
-		};
-
-		window.addEventListener("resize", handleResize);
-		handleResize(); // Check on mount
-
-		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
 	return (
@@ -173,29 +161,27 @@ const App = () => {
 				</div>
 
 				<>
-					{isMobile && (
-						<div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-							<div className="bg-white m-4 rounded-lg p-6 shadow-lg max-w-sm w-full">
-								<h2 className="text-lg font-semibold mb-4">Attention</h2>
-								<p className="mb-2">
-									Our team is working on a mobile and responsive version.
-								</p>
-								<p className="mb-4">
-									Please use the desktop version for a better experience.
-								</p>
-								<button
-									onClick={() =>
-										alert(
-											"To switch to desktop mode, please resize your browser window or use the 'Request Desktop Site' option in your browser settings."
-										)
-									}
-									className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-								>
-									Switch to Desktop Mode
-								</button>
-							</div>
+					<div className="fixed 3xl:hidden inset-0 flex items-center justify-center bg-black bg-opacity-50">
+						<div className="bg-white m-4 rounded-lg p-6 shadow-lg max-w-sm w-full">
+							<h2 className="text-lg font-semibold mb-4">Attention</h2>
+							<p className="mb-2">
+								Our team is working on a mobile and responsive version.
+							</p>
+							<p className="mb-4">
+								Please use the desktop version for a better experience.
+							</p>
+							<button
+								onClick={() =>
+									alert(
+										"To switch to desktop mode, please resize your browser window or use the 'Request Desktop Site' option in your browser settings."
+									)
+								}
+								className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+							>
+								Switch to Desktop Mode
+							</button>
 						</div>
-					)}
+					</div>
 				</>
 			</AnimatePresence>
 		</ThemeProvider>
